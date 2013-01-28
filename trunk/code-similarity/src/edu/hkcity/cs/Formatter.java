@@ -1,8 +1,12 @@
 package edu.hkcity.cs;
 
+import java.io.*;
+
 public abstract class Formatter {
-	public Formatter() {
-		
+	protected String formattedString;
+	public Formatter(InputStream data){
 	}
-	public abstract String getFormattedData(String data);
+	public InputStream getFormattedData(){
+		return new ByteArrayInputStream(formattedString.getBytes());
+	}
 }

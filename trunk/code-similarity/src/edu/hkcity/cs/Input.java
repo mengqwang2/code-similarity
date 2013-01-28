@@ -4,25 +4,26 @@ import java.io.*;
 
 public class Input {
 	private String filename;
-	private InputStream stream;
 	public Input(){
 		
 	}
-	
 	public Input(String filename){
+		this.filename=filename;
 		try {
-			stream=new FileInputStream(filename);
+			new FileInputStream(filename);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 	public String getFilename(){
 		return filename;
 	}
-	
 	public InputStream getStream(){
-		return stream;
+		try {
+			return new FileInputStream(filename);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
