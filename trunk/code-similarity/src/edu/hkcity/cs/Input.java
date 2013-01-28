@@ -1,5 +1,16 @@
 package edu.hkcity.cs;
 
-public abstract class Input {
-
+public class Input {
+	private String filename;
+	public Input() {
+		
+	}
+	
+	public Input(String filename) {
+		
+	}
+	
+	public String getFilename() {
+		return filename;
+	}
 }
