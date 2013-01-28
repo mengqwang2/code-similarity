@@ -7,6 +7,6 @@ public class PercentageOutput extends Output{
 	
 	@Override
 	public void display(){
-		// TODO Auto-generated method stub
+		System.out.printf( "%.2f%%%n", c.getResult() * 100);
 	}
 }

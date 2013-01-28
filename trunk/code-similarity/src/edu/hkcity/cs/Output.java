@@ -1,7 +1,7 @@
 package edu.hkcity.cs;
 
 public abstract class Output {
-	private Comparar comparar;
+	protected Comparar comparar;
 	public Output(Comparar c) {
 		comparar = c;
 	}
