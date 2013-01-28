@@ -1,5 +1,5 @@
 package edu.hkcity.cs;
 
-public class LineByLineFormatter {
+public class LineByLineFormatter extends Formatter{
 
 }
