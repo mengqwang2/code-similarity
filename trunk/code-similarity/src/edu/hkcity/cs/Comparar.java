@@ -1,20 +1,32 @@
 package edu.hkcity.cs;
 
-/*
- * To other member that implement this class:
- * this class is created for testing the output classes.
- * please overwrite this class with the real Comparar class
- * You may ignore the errores in PercentageOutputTest class
- * 
- * By KK
- */
+import java.lang.String;
 
-public class Comparar{
-	private double result;
-	public Comparar(double res) {
-		result = res;
+import edu.hkcity.cs.*;
+
+public abstract class Comparer{
+	// Constructors
+	public Comparer() {} 
+	public Comparer(String tar,String ori){
+		this.setTar(tar);
+		this.setOri(ori);
 	}
-	public double getResult() {
-		return result;
+	// Compare two formatted strings
+	public abstract void compare();
+	
+	private void setTar(String tar) {
+		this.tar = tar;
 	}
+	protected String getTar() {
+		return tar;
+	}
+	private void setOri(String ori) {
+		this.ori = ori;
+	}
+	protected String getOri() {
+		return ori;
+	}
+
+	private String tar;
+	private String ori;
 }
