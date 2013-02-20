@@ -17,6 +17,7 @@ public class PercentageOutputTest {
 	@Before
 	public void setUp() {
 		System.setOut(new PrintStream(output));
+		po = new PercentageOutput();
 	}
 
 	@After
@@ -26,18 +27,20 @@ public class PercentageOutputTest {
 	}
 
 	@Test
-	public void testDisplay_1() {
-		Comparar c = new Comparar(0.3333333333);
-		po = new PercentageOutput(c);
-		po.display();
+	public void testPrint_1() {
+		po.print(0.333333333d);
 		assertEquals("33.33%\n", output.toString());
 	}
 	
 	@Test
-	public void testDisplay_2() {
-		Comparar c = new Comparar(1);
-		po = new PercentageOutput(c);
-		po.display();
+	public void testPrint_2() {
+		po.print(1d);
 		assertEquals("100.00%\n", output.toString());
+	}
+	
+	@Test
+	public void testPrint_3() {
+		po.print(0.99d);
+		assertEquals("99.00%\n", output.toString());
 	}
 }
