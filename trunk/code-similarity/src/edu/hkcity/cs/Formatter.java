@@ -23,7 +23,7 @@ public class Formatter {
 		return formattedString;//TO DO
 	}
 	private String deleteBlankLine(){
-		return formattedString.replaceAll("\n\n", "\n");
+		return formattedString.replaceAll("[\r\n]+", "\n");
 	}
 	public String getFormattedData(){
 		return formattedString;
