@@ -6,11 +6,12 @@ public class Formatter {
 	private String formattedString;
 	public Formatter(){
 	}
-	public String format(){
-		deleteIndent();
-		simplyMultispace();
-		deleteComment();
-		deleteBlankLine();
+	public String format(String str){
+		formattedString = str;
+		formattedString = deleteIndent();
+		formattedString = simplyMultispace();
+		formattedString = deleteComment();
+		formattedString = deleteBlankLine();
 		return formattedString;
 	}
 	private String deleteIndent(){
