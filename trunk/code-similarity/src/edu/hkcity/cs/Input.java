@@ -38,6 +38,7 @@ public class Input {
 	}
 	*/
 	
+	
 	public Input(String oriName, String tarName){
 		try {
 			File oriFile = new File(oriName);
@@ -45,7 +46,7 @@ public class Input {
 			InputStream oriStream = new FileInputStream(oriFile);
 			InputStream tarStream = new FileInputStream(tarFile);
 			byte[] oriBuf = new byte[(int) oriFile.length()];
-			byte[] tarBuf = new byte[(int) tarName.length()];
+			byte[] tarBuf = new byte[(int) tarFile.length()];
 			
 			oriStream.read(oriBuf);
 			tarStream.read(tarBuf);
@@ -63,5 +64,21 @@ public class Input {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getOriginalFile() {
+		return originalFile;
+	}
+
+	public void setOriginalFile(String originalFile) {
+		this.originalFile = originalFile;
+	}
+
+	public String getTargetFile() {
+		return targetFile;
+	}
+
+	public void setTargetFile(String targetFile) {
+		this.targetFile = targetFile;
 	}
 }
