@@ -4,7 +4,11 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Input {
-	private String filename;
+	
+	private String originalFile;
+	private String targetFile;
+	
+	/*
 	public Input(){
 		filename=null;
         Scanner scanner = new Scanner(System.in);
@@ -19,23 +23,45 @@ public class Input {
 			}
         }
 	}
-	public Input(String filename){
-		this.filename=filename;
-		try {
-			new FileInputStream(filename);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	public String getFilename(){
 		return filename;
 	}
+	
 	public InputStream getStream(){
 		try {
 			return new FileInputStream(filename);
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found:"+filename);
 			return null;
+		}
+	}
+	*/
+	
+	public Input(String oriName, String tarName){
+		try {
+			File oriFile = new File(oriName);
+			File tarFile = new File(tarName);
+			InputStream oriStream = new FileInputStream(oriFile);
+			InputStream tarStream = new FileInputStream(tarFile);
+			byte[] oriBuf = new byte[(int) oriFile.length()];
+			byte[] tarBuf = new byte[(int) tarName.length()];
+			
+			oriStream.read(oriBuf);
+			tarStream.read(tarBuf);
+			
+			oriStream.close();
+			tarStream.close();
+			
+			originalFile = new String(oriBuf);
+			targetFile = new String(tarBuf);
+			
+			new LineByLineComparar(originalFile, targetFile);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

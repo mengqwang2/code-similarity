@@ -5,10 +5,10 @@ import java.io.*;
 
 import edu.hkcity.cs.*;
 
-public class LineByLineComparer extends Comparer{
+public class LineByLineComparar extends Comparar{
 	// Constructors
-	public LineByLineComparer() {} 
-	public LineByLineComparer(String tar,String ori){
+	public LineByLineComparar() {} 
+	public LineByLineComparar(String tar,String ori){
 		super(tar, ori);
 	}
 	// Compare two formatted strings

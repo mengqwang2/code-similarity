@@ -4,10 +4,10 @@ import java.lang.String;
 
 import edu.hkcity.cs.*;
 
-public abstract class Comparer{
+public abstract class Comparar{
 	// Constructors
-	public Comparer() {} 
-	public Comparer(String tar,String ori){
+	public Comparar() {} 
+	public Comparar(String tar,String ori){
 		this.setTar(tar);
 		this.setOri(ori);
 	}
