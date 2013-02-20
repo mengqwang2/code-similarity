@@ -2,10 +2,9 @@ package edu.hkcity.cs;
 
 import java.io.*;
 
-public abstract class Formatter {
-	protected String formattedString;
-	public Formatter(String data){
-		formattedString=data;
+public class Formatter {
+	private String formattedString;
+	public Formatter(){
 	}
 	public String format(){
 		deleteIndent();
