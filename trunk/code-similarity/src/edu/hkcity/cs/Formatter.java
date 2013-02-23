@@ -16,7 +16,7 @@ public class Formatter {
 		return formattedString.replaceAll("^[ \\t]+", "");
 	}
 	private String simplyMultispace(){
-		return formattedString.replaceAll("[ \t]+"," ");
+		return formattedString.replaceAll("[ \\t]+"," ");
 	}
 	private String deleteComment(){
 		return formattedString.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/)|(//.*)", "");
