@@ -51,13 +51,38 @@ public class FormatterTest {
 		assertEquals(" Hello world! ", fm.format(str) );
 	}
 	
+	@Test
 	public void testSimplyMultispace_3() {
 		String str = "\t\t \t   \t     \t\t\t\t    \t \t \t    \t";
 		assertEquals(" ", fm.format(str) );
 	}
 	
+	@Test
+	public void testDeleteComment_1() {
+		String str = "System.out.println(\"Hi!\\n\")// Say Hi!\nreturn 0;/*\n*Bye!\n*/";
+		assertEquals("System.out.println(\"Hi!\\n\")\nreturn 0;", fm.format(str) );
+	}
+	
+	@Test
+	public void testDeleteComment_2() {
+		String str = "System.out.println(\"Hi!\\n\")/*\n*Say Hi!\n*/\nreturn 0;/*\n*Bye!\n*/";
+		assertEquals("System.out.println(\"Hi!\\n\")\nreturn 0;", fm.format(str) );
+	}
+	
+	@Test
+	public void testDeleteComment_3() {
+		String str = "System.out.println(\"Hi!\\n\")// Say Hi!\nreturn 0;//Bye!";
+		assertEquals("System.out.println(\"Hi!\\n\")\nreturn 0;", fm.format(str) );
+	}
+	
+	@Test
+	public void testDeleteComment_4() {
+		String str = "System.out.println(\"Hi!\\n\")/*\n*Say Hi!\n*/\nreturn 0;//Bye!";
+		assertEquals("System.out.println(\"Hi!\\n\")\nreturn 0;", fm.format(str) );
+	}
+	
 	@Test 
-	public void reference_test_() {
+	public void reference_test() {
 		String str = "Hi";
 		assertEquals("Hi", fm.format(str) );
 	}

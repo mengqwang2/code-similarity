@@ -43,6 +43,7 @@ public class InputTest {
 			tar_fw.close();
 			
 			Input input = new Input("ori.txt", "tar.txt");
+			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
 			assertEquals(inStr, input.getTargetFile());
 		} catch (IOException e) {
@@ -69,6 +70,7 @@ public class InputTest {
 			tar_fw.close();
 			
 			Input input = new Input("ori.txt", "tar.txt");
+			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
 			assertEquals(inStr, input.getTargetFile());
 		} catch (IOException e) {
@@ -89,6 +91,7 @@ public class InputTest {
 			tar_fw.close();
 			
 			Input input = new Input("ori.txt", "tar.txt");
+			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
 			assertEquals(inStr, input.getTargetFile());
 		} catch (IOException e) {
