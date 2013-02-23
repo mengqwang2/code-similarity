@@ -16,8 +16,8 @@ public class LineByLineComparar extends Comparar{
 		String target = fmt.format(super.getTar());
 		String original = fmt.format(super.getOri());
 		
-		String[] tarStr = super.getTar().split("\n");//target.split("\n");
-		String[] oriStr = super.getOri().split("\n");//original.split("\n");
+		String[] tarStr = target.split("\n");//target.split("\n");
+		String[] oriStr = original.split("\n");//original.split("\n");
 		
 		int tarLength = tarStr.length;
 		int oriLength = oriStr.length;
