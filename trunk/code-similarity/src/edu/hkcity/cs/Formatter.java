@@ -13,7 +13,7 @@ public class Formatter {
 		return formattedString;
 	}
 	private String deleteIndent(){
-		return formattedString;
+		return formattedString.replaceAll("\\A[\\t ]*", "");
 	}
 	private String simplyMultispace(){
 		return formattedString.replaceAll("[ \t]+"," ");
