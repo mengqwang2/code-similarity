@@ -30,10 +30,12 @@ public class FuncByFuncComparar extends Comparar{
 	      Pattern r = Pattern.compile(pattern);
 
 	      // Now create matcher object.
-	      String[] tokArr = null;
+	      
 	      Matcher m = r.matcher(str);
+	      String[] tokArr = null;
 	      int n = m.groupCount();
 	      if (m.find( )) {
+	    	  tokArr = new String[n];
 	    	  for(int i = 0; i!= n; ++i) {
 	    		  tokArr[i] = new String(m.group(i));
 	    	  }
