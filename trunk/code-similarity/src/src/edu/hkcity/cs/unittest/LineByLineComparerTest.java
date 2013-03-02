@@ -38,13 +38,15 @@ public class LineByLineComparerTest {
 		String ori ="#include<iosteam>\n\nvoid main(){\nint a,b;\nstd::cin>>a>>b;\nstd::cout<<a+b<<endl;\n}\n";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare();
-		assertEquals(result, "0.25");
+		assertEquals(result, "0.125");
 	}
+	
+	@Test
 	public void testCompare_case4() {
-		String tar ="#include<iostream>\nusing namespace std;\nint x,y;\nint main(){\nwhile(cin>>x>>y)\n\tcout<<x+y<<endl;\n}\n";
+		String tar ="#include<iostream>\nusing namespace std;\nint x,y;\nint main(){\nwhile(cin>>x>>y)\n\tcout<<x+y;\ncout<<endl;\n}\n";
 		String ori ="#include<iostream>\nusing namespace std;\nint main(){\nint x,y;\nwhile(cin>>x)\n{\tcin>>y;\n\tcout<<x+y<<endl;\n}\n}\n";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare();
-		assertEquals(result, "0.29");
+		assertEquals(result, "0.375");
 	}
 }

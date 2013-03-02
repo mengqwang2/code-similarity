@@ -1,9 +1,9 @@
 package edu.hkcity.cs.unittest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.FileWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.After;
@@ -43,6 +43,7 @@ public class InputTest {
 			tar_fw.close();
 			
 			Input input = new Input("ori.txt", "tar.txt");
+			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
 			assertEquals(inStr, input.getTargetFile());
 		} catch (IOException e) {
@@ -69,6 +70,7 @@ public class InputTest {
 			tar_fw.close();
 			
 			Input input = new Input("ori.txt", "tar.txt");
+			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
 			assertEquals(inStr, input.getTargetFile());
 		} catch (IOException e) {
@@ -89,6 +91,7 @@ public class InputTest {
 			tar_fw.close();
 			
 			Input input = new Input("ori.txt", "tar.txt");
+			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
 			assertEquals(inStr, input.getTargetFile());
 		} catch (IOException e) {

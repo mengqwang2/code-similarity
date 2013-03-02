@@ -6,6 +6,6 @@ public class PercentageOutput extends Output{
 	
 	@Override 
 	public void print(String result) {
-		System.out.printf(result);
+		System.out.printf("%.2f%%\n",Double.parseDouble(result)*100);
 	}
 }

@@ -13,16 +13,16 @@ public class Formatter {
 		return formattedString;
 	}
 	private String deleteIndent(){
-		return formattedString;//TO DO
+		return formattedString.replaceAll("^[ \\t]+", "");
 	}
 	private String simplyMultispace(){
-		return formattedString.replaceAll("\b+"," ");
+		return formattedString.replaceAll("[ \t]+"," ");
 	}
 	private String deleteComment(){
-		return formattedString;//TO DO
+		return formattedString.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/)|(//.*)", "");
 	}
 	private String deleteBlankLine(){
-		return formattedString.replaceAll("[\r\n]+", "\n");
+		return formattedString.replaceAll("^[\r\n]+", "").replaceAll("[\r\n]+", "\n");
 	}
 	public String getFormattedData(){
 		return formattedString;
