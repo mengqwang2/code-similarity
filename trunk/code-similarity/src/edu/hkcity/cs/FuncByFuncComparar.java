@@ -1,6 +1,8 @@
 package edu.hkcity.cs;
 
 import java.lang.String;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FuncByFuncComparar extends Comparar{
 	// Constructors
@@ -19,6 +21,26 @@ public class FuncByFuncComparar extends Comparar{
 		return new String("");
 	}
 	
+	@SuppressWarnings("null")
+	private String[] getTok(String str){
+	      // String to be scanned to find the pattern.
+	      String pattern = "(\\w+)";
+
+	      // Create a Pattern object
+	      Pattern r = Pattern.compile(pattern);
+
+	      // Now create matcher object.
+	      String[] tokArr = null;
+	      Matcher m = r.matcher(str);
+	      int n = m.groupCount();
+	      if (m.find( )) {
+	    	  for(int i = 0; i!= n; ++i) {
+	    		  tokArr[i] = new String(m.group(i));
+	    	  }
+	      }
+	      return tokArr;
+	}
+	
 	private double checkSimilarity(String tar, String org) {
 		return 0.1;
 	}
@@ -27,3 +49,4 @@ public class FuncByFuncComparar extends Comparar{
 		return 0.1;
 	}
 }
+ 
