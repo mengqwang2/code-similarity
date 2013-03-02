@@ -1,6 +1,7 @@
 package edu.hkcity.cs;
 
 import java.lang.String;
+import java.util.*;
 
 public class FuncByFuncComparar extends Comparar{
 	// Constructors
