@@ -1,5 +1,7 @@
 package edu.hkcity.cs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +20,9 @@ public class FuncByFuncComparar extends Comparar{
 
 			return new String("");	
 	}
-	
+	public String[] getTokP(String str){
+		return getTok(str);
+	}
 	private String[] getTok(String str){
 	      // String to be scanned to find the pattern.
 	      String pattern = "(\\w+)";
@@ -29,19 +33,16 @@ public class FuncByFuncComparar extends Comparar{
 	      // Now create matcher object.
 	      
 	      Matcher m = r.matcher(str);
-	      String[] tokArr = null;
-	      int n = m.groupCount();
-	      if (m.find( )) {
-	    	  tokArr = new String[n];
-	    	  for(int i = 0; i!= n; ++i) {
-	    		  tokArr[i] = new String(m.group(i));
-	    	  }
+	     
+	      List<String> allMatches= new ArrayList<String>();
+	      while (m.find( )) {
+	    	  //System.out.print(m.group());
+	    	  allMatches.add(m.group());
 	      }
-	      return tokArr;
+	      return allMatches.toArray(new String[0]);
 	}
-	public double testCheckSim(String t, String o){
-		return checkSimilarity(t,o);
-	}
+
+	
 	private double checkSimilarity(String tar, String org) {
 		  String[] token1 = getTok(tar);
 	      String[] token2 = getTok(org);
