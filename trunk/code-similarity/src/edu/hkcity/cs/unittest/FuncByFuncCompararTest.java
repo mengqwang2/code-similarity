@@ -15,11 +15,48 @@ public class FuncByFuncCompararTest {
 
 	@Test
 	public void testCheckSimilarity() {
-		String tar ="#include <iostream>\nusingnamespace std;\nvoid main() {\n\tcout << \"hello world!\";\n}";
-		String ori ="#include <iostream>\nusingnamespace standard;\nint main() {\n\tcout << \"hello world!\";\n}";
-		comp = new FuncByFuncComparar();
-		String result = Double.toString(comp.testCheckSim(tar, ori));
-		//Double result = comp.testCheckSim(tar, ori);
+		class FuncStub extends FuncByFuncComparar {
+			public double testCheckSim(String t, String o){
+				return checkSimilarity(t,o);
+			}
+			private double checkSimilarity(String tar, String org) {
+				String []token1={"abc","abd","qwe","qaz"};
+				String []token2={"abd","sdf","ghj","qaz"};
+				int n=token1.length;
+			    int m=token2.length;
+			    int[][] C = new int[n+1][m+1];
+					
+			    /* C[i][0] = 0 for 0<=i<=n */
+			    for (int i = 0; i <= n; i++) {
+			    	C[i][0] = 0;
+			    }
+				
+			    /* C[0][j] = 0 for  0<=j<=m */
+			    for (int j = 0; j <= m; j++) {
+			        C[0][j] = 0;
+			    }
+			    /* dynamic programming */
+			    for (int i = 1; i <= n; i++) {
+			    	for (int j = 1; j <= m; j++) {
+			    		if (token1[i-1]== token2[j-1]) 
+			            {
+			    			C[i][j]=C[i-1][j-1]+1;
+			            }
+			            else if (C[i-1][j]>=C[i][j-1]) 
+			            {
+			            	C[i][j]=C[i-1][j];
+			            }
+			            else 
+			            {
+			            	C[i][j]=C[i][j-1];     
+			            }
+			        }
+			    }
+			    return C[n][m]*1.0/n;
+			}
+		};
+		FuncStub comp = new FuncStub();
+		String result = Double.toString(comp.testCheckSim("", ""));
 		assertEquals(result, "0.5");
 	}
 
