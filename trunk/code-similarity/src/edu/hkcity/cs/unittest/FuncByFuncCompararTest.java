@@ -8,7 +8,6 @@ import org.junit.Test;
 import edu.hkcity.cs.FuncByFuncComparar;
 
 public class FuncByFuncCompararTest {
-	FuncByFuncComparar comp;
 	@Before
 	public void setUp() throws Exception {
 	}
