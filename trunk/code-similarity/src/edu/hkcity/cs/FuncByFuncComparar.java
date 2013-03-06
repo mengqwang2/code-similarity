@@ -43,7 +43,45 @@ public class FuncByFuncComparar extends Comparar{
 		ArrayList<String> targetFuncList=splitFunction(target);
 		ArrayList<String> originalFuncList=splitFunction(original);
 		
-		return new String("");	
+		boolean oriFuncPaired[] = new boolean[originalFuncList.size()];
+		double sims[] = new double [Math.max(targetFuncList.size(), originalFuncList.size())];
+		int lnt[] = new int[sims.length];
+		int sims_i = 0, count_j = 0;
+		for(int i=0; i<targetFuncList.size(); i++) {
+			double max_sim = 0;
+			int max_j = -1;
+			for(int j=0; j<originalFuncList.size(); j++) {
+				if(oriFuncPaired[j]) continue;
+				double sim = checkSimilarity(targetFuncList.get(i),originalFuncList.get(j));
+				if(sim > max_sim) {
+					max_j = j;
+					max_sim = sim;
+				}
+			}
+			if(max_j != -1) {
+				count_j++;
+				oriFuncPaired[max_j] = true;
+				lnt[sims_i] = Math.max(targetFuncList.get(i).length(),originalFuncList.get(max_j).length());
+			}else {
+				lnt[sims_i] = targetFuncList.get(i).length();
+			}
+			sims[sims_i++] =  max_sim;
+		}
+		if(count_j != originalFuncList.size()) {
+			for(int j=0; j<originalFuncList.size(); j++) {
+				if(oriFuncPaired[j]) continue;
+				sims[sims_i] =  0;
+				lnt[sims_i++] = originalFuncList.get(j).length();
+				oriFuncPaired[j] = true;
+			}
+		}
+		
+		
+		String result = Double.toString(calSimilarity(sims, lnt));
+		
+		output.print(result);
+		
+		return result;	
 	}
 	private ArrayList<String> splitFunction(String program){
 		ArrayList<String> funcList=new ArrayList<String>();
@@ -121,7 +159,7 @@ public class FuncByFuncComparar extends Comparar{
 	}
 	
 	@SuppressWarnings("unused")
-	private double calSimilarity(double sims[], int lnt[], int length){
+	private double calSimilarity(double sims[], int lnt[]){
 		return 0.1;
 	}
 }
