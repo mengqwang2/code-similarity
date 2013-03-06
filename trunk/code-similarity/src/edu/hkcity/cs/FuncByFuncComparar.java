@@ -41,10 +41,8 @@ public class FuncByFuncComparar extends Comparar{
 		String target = getTar();
 		String original = getOri();
 		ArrayList<String> targetFuncList=splitFunction(target);
-		for(int n=0;n<targetFuncList.size();n++){
-			System.out.printf("=====\n%s\n=====\n", targetFuncList.get(n));
-		}
 		ArrayList<String> originalFuncList=splitFunction(original);
+		
 		return new String("");	
 	}
 	private ArrayList<String> splitFunction(String program){
