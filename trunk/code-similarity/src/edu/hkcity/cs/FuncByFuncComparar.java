@@ -1,5 +1,6 @@
 package edu.hkcity.cs;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,13 +13,55 @@ public class FuncByFuncComparar extends Comparar{
 	public FuncByFuncComparar(String tar,String ori){
 		super(tar, ori);
 	}
-
+	public static void main(String[] args){
+		try {
+	        StringBuffer fileData = new StringBuffer();
+	        BufferedReader reader;
+				reader = new BufferedReader(new FileReader("test.c"));
+	        char[] buf = new char[1024];
+	        int numRead=0;
+	        while((numRead=reader.read(buf)) != -1){
+	            String readData = String.valueOf(buf, 0, numRead);
+	            fileData.append(readData);
+	        }
+	        reader.close();
+	        System.out.printf("Start test \n");
+	        new FuncByFuncComparar(fileData.toString(),fileData.toString()).compare();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	// For KK & Bill.
-	public String compare()
-	{		
-	     	
-
-			return new String("");	
+	public String compare(){		
+		Formatter fmt = new Formatter();
+		Output output = new PercentageOutput();
+		
+		//String target = fmt.format(getTar());
+		//String original = fmt.format(getOri());
+		String target = getTar();
+		String original = getOri();
+		ArrayList<String> targetFuncList=splitFunction(target);
+		for(int n=0;n<targetFuncList.size();n++){
+			System.out.printf("=====\n%s\n=====\n", targetFuncList.get(n));
+		}
+		ArrayList<String> originalFuncList=splitFunction(original);
+		return new String("");	
+	}
+	private ArrayList<String> splitFunction(String program){
+		ArrayList<String> funcList=new ArrayList<String>();
+		Pattern pattern = Pattern.compile("[\\w\\*]* [\\w]*\\((.*)\\)[ \\r\\n]*\\{",Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(program);
+    	int start=0;
+    	int nextStart=0;
+        while(matcher.find()){
+        	start=nextStart;
+        	nextStart=matcher.start();
+	        if(start!=0){
+	        	funcList.add(program.substring(start,nextStart).replaceAll("[\\r\\n\\s]+$",""));
+	        }
+        }
+    	funcList.add(program.substring(nextStart,program.length()).replaceAll("[\\r\\n\\s]+$",""));
+		return funcList;
 	}
 	public String[] getTokP(String str){
 		return getTok(str);
