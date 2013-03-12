@@ -160,7 +160,14 @@ public class FuncByFuncComparar extends Comparar{
 	
 	@SuppressWarnings("unused")
 	private double calSimilarity(double sims[], int lnt[]){
-		return 0.1;
+		double interSim=0;
+		int totalLine=0;
+		for(int i=0;i<sims.length;i++){
+			interSim+=sims[i]*lnt[i];
+			totalLine+=lnt[i];
+		}
+		return (double)interSim/totalLine;
 	}
 }
+
  
