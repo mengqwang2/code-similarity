@@ -48,7 +48,7 @@ public class FuncByFuncComparar extends Comparar{
 		int lnt[] = new int[sims.length];
 		int sims_i = 0, count_j = 0;
 		for(int i=0; i<targetFuncList.size(); i++) {
-			double max_sim = 0;
+			double max_sim = -1;
 			int max_j = -1;
 			for(int j=0; j<originalFuncList.size(); j++) {
 				if(oriFuncPaired[j]) continue;
@@ -158,7 +158,6 @@ public class FuncByFuncComparar extends Comparar{
 	        return C[n][m]*1.0/n;
 	}
 	
-	@SuppressWarnings("unused")
 	private double calSimilarity(double sims[], int lnt[]){
 		double interSim=0;
 		int totalLine=0;

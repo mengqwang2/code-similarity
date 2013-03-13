@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.hkcity.cs.Comparar;
 import edu.hkcity.cs.FuncByFuncComparar;
 
 public class FuncByFuncCompararTest {
@@ -57,6 +58,14 @@ public class FuncByFuncCompararTest {
 		FuncStub comp = new FuncStub();
 		String result = Double.toString(comp.testCheckSim("", ""));
 		assertEquals(result, "0.5");
+	}
+	
+	@Test
+	public void testCompare_1() {
+		String ori = "int main () { printf(\"hello!\\n\");}";
+		String tar = ori;
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "1.0");
 	}
 
 }
