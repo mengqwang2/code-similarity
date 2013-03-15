@@ -20,8 +20,8 @@ public class FuncByFuncCompararTest {
 				return checkSimilarity(t,o);
 			}
 			private double checkSimilarity(String tar, String org) {
-				String []token1={"abc","abd","qwe","qaz"};
-				String []token2={"abd","sdf","ghj","qaz"};
+				String []token1={"a","b","c","d"};
+				String []token2={"a","b","c","d"};
 				int n=token1.length;
 			    int m=token2.length;
 			    int[][] C = new int[n+1][m+1];
@@ -38,7 +38,7 @@ public class FuncByFuncCompararTest {
 			    /* dynamic programming */
 			    for (int i = 1; i <= n; i++) {
 			    	for (int j = 1; j <= m; j++) {
-			    		if (token1[i-1]== token2[j-1]) 
+			    		if (token1[i-1].equals(token2[j-1])) 
 			            {
 			    			C[i][j]=C[i-1][j-1]+1;
 			            }
@@ -55,9 +55,27 @@ public class FuncByFuncCompararTest {
 			    return C[n][m]*1.0/n;
 			}
 		};
-		FuncStub comp = new FuncStub();
-		String result = Double.toString(comp.testCheckSim("", ""));
-		assertEquals(result, "0.5");
+		FuncByFuncComparar comp = new FuncByFuncComparar();
+		//String result = Double.toString(comp.Pch("aa+b", "aa+b"));
+		//assertEquals(result, "1.0");
+	}
+
+	@Test
+	public void testgetTokP(){
+		FuncByFuncComparar comp=new FuncByFuncComparar();
+		String ori=new String("public void testgetTokP(){ FuncByFuncComparar comp=new FuncByFuncComparar();");
+		//String[] s=comp.getTokP(ori);
+		
+		//assertEquals(s,"ss");
+		
+		
+	}
+	@Test
+	public void testCheckSimilarity1() {
+		
+		FuncByFuncComparar comp = new FuncByFuncComparar();
+		String result = Double.toString(comp.Pch("aa+b", "aa+b"));
+		assertEquals(result, "1.0");
 	}
 	
 	@Test
