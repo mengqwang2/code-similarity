@@ -1,51 +1,43 @@
 package edu.hkcity.cs;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Input {
-	
+	private String originalFileName;
+	private String targetFileName;
 	private String originalFile;
 	private String targetFile;
 	
-	public static void main(String arg[]) {
-		Input input = new Input("","");
-		input.start();
-	}
-	/*
 	public Input(){
-		filename=null;
+		originalFileName=getFilename("Please enter original name:");
+		targetFileName=getFilename("Please enter target name:");
+	}
+	public Input(String oriName, String tarName){
+		originalFileName=oriName;
+		targetFileName=tarName;
+	}
+
+	private String getFilename(String msg) {
         Scanner scanner = new Scanner(System.in);
-        while(filename==null){
-			System.out.print("Please enter filename:"); 
-			filename=scanner.next();
+        String fileName=null;
+        while(fileName==null){
+			System.out.print(msg); 
+			fileName=scanner.next();
 			try{
-				new FileInputStream(filename);
+				new FileInputStream(fileName);
 			}catch(FileNotFoundException e){
-				System.out.println("File Not Found:"+filename);
-				filename=null;
+				System.out.println("File Not Found:"+fileName);
+				fileName=null;
 			}
         }
+        return fileName;
 	}
 	
-	public String getFilename(){
-		return filename;
-	}
-	
-	public InputStream getStream(){
+	public void getInput() {
 		try {
-			return new FileInputStream(filename);
-		} catch (FileNotFoundException e) {
-			System.out.println("File Not Found:"+filename);
-			return null;
-		}
-	}
-	*/
-	
-	
-	public Input(String oriName, String tarName){
-		try {
-			File oriFile = new File(oriName);
-			File tarFile = new File(tarName);
+			File oriFile = new File(originalFileName);
+			File tarFile = new File(targetFileName);
 			InputStream oriStream = new FileInputStream(oriFile);
 			InputStream tarStream = new FileInputStream(tarFile);
 			byte[] oriBuf = new byte[(int) oriFile.length()];
@@ -60,17 +52,15 @@ public class Input {
 			originalFile = new String(oriBuf);
 			targetFile = new String(tarBuf);
 			
+			new LineByLineComparar(originalFile, targetFile).compare();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void start() {
-		LineByLineComparar comparar = new LineByLineComparar(originalFile, targetFile);
-		comparar.compare();
-	}
+
 	public String getOriginalFile() {
 		return originalFile;
 	}
@@ -85,5 +75,10 @@ public class Input {
 
 	public void setTargetFile(String targetFile) {
 		this.targetFile = targetFile;
+	}
+	
+	public static void main(String[] args){
+		Input in=new Input();
+		in.getInput();
 	}
 }
