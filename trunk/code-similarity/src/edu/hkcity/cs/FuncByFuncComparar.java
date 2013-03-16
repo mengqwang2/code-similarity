@@ -166,8 +166,6 @@ public class FuncByFuncComparar extends Comparar{
 		    return C[n][m]*1.0/n;
 		}
 	
-	@SuppressWarnings("unused")
-
 	private double calSimilarity(double sims[], int lnt[]){
 		double interSim=0;
 		int totalLine=0;
@@ -176,6 +174,50 @@ public class FuncByFuncComparar extends Comparar{
 			totalLine+=lnt[i];
 		}
 		return (double)interSim/totalLine;
+	}
+	
+	public double calSameVar(String []tar,String[] ori)
+    {
+        int count=0;
+        int nTar=tar.length;
+        int nOri=ori.length;
+        for(int i=0;i<nTar;i++)
+        {
+            for(int j=0;j<nOri;j++)
+             {
+                if(tar[i]==ori[j])
+                    count++;
+            }
+        }
+        
+        return (double)count/nTar;
+
+    }
+	
+	
+	private String[] getVarNames(String source) {
+		String varNames[];
+		varNames = source.split(join(keywords, "|"));
+		return varNames;
+	}
+	
+	private String[] keywords={"abstract","continue", "for", "new", "switch", "assert***", "default", "goto*", "package", "synchronized", "boolean", "do", "if", "private", "this", 
+			"break", "double", "implements", "protected", "throw", 
+			"byte", "else", "import", "public", "throws", 
+			"case", "enum****", "instanceof", "return", "transient", 
+			"catch", "extends", "int", "short", "try", 
+			"char", "final", "interface", "static", "void", 
+			"class", "finally", "long", "strictfp**", "volatile", 
+			"const*", "float", "native", "super", "while", "true", "false", "null",
+			"=", "+", "-", "*", "/", "%", "++", "--", "!", "==", "!=", ">", ">=", "<",
+			"<=", "&&", "||", "?", ":", "instanceof", "~", "<<", ">>", ">>>", "&", "^", "|"
+			};
+	private String join(String []arr, String sep) {
+		String result="";
+		int length=arr.length;
+		for(int i=0;i<length;++i)
+			result += arr[i]+sep;
+		return result;
 	}
 }
 
