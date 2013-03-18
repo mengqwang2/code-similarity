@@ -12,7 +12,7 @@ public class FuncByFuncCompararTest {
 	@Before
 	public void setUp() throws Exception {
 	}
-
+	/*
 	@Test
 	public void testCheckSimilarity() {
 		class FuncStub extends FuncByFuncComparar {
@@ -26,16 +26,16 @@ public class FuncByFuncCompararTest {
 			    int m=token2.length;
 			    int[][] C = new int[n+1][m+1];
 					
-			    /* C[i][0] = 0 for 0<=i<=n */
+			    // C[i][0] = 0 for 0<=i<=n 
 			    for (int i = 0; i <= n; i++) {
 			    	C[i][0] = 0;
 			    }
 				
-			    /* C[0][j] = 0 for  0<=j<=m */
+			    // C[0][j] = 0 for  0<=j<=m 
 			    for (int j = 0; j <= m; j++) {
 			        C[0][j] = 0;
 			    }
-			    /* dynamic programming */
+			    // dynamic programming 
 			    for (int i = 1; i <= n; i++) {
 			    	for (int j = 1; j <= m; j++) {
 			    		if (token1[i-1].equals(token2[j-1])) 
@@ -84,6 +84,28 @@ public class FuncByFuncCompararTest {
 		String tar = ori;
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(), "1.0");
-	}
+	}*/
+	
+	@Test
+	public void testGetVarNames() {
+		class FuncStub extends FuncByFuncComparar {
+			public String testGetVarN(String source) {
+				String result="";
+				String[] temp = getVarNames(source);
+				int length=temp.length;
+				for(int i=0;i<length;++i)
+					result += temp[i];
+				return result;
+			}
+			public boolean testIsVar(String token) {
+				return isVar(token);
+			}
+		}
 
+		FuncStub fc = new FuncStub();
+		//String result = fc.testGetVarN("int 123var1=12342\n\n\n3333var2+234var3;");
+		//assertEquals(result, "var1var2var3");
+		boolean result = fc.testIsVar("abc");
+		assertEquals(result, true);
+	}
 }
