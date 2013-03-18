@@ -3,8 +3,7 @@ package edu.hkcity.cs;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class FuncByFuncComparar extends Comparar{
 	public FuncByFuncComparar() {
@@ -127,6 +126,7 @@ public class FuncByFuncComparar extends Comparar{
 		return checkSimilarity(tar,org);
 	
 	}
+	// LCS
 	private double checkSimilarity(String tar, String org) {
 		  String[] token1 = getTok(tar);
 	      String[] token2 = getTok(org);
@@ -176,6 +176,7 @@ public class FuncByFuncComparar extends Comparar{
 		return (double)interSim/totalLine;
 	}
 	
+	// Jenny & Benson
 	public double calSameVar(String []tar,String[] ori)
     {
         int count=0;
@@ -193,31 +194,50 @@ public class FuncByFuncComparar extends Comparar{
         return (double)count/nTar;
 
     }
+
 	
 	
-	private String[] getVarNames(String source) {
+	
+	
+	// Gavin - please retain all code below at the bottom of the class, for my easy debug, thanks!
+	private double calLogicSim(String tar, String ori) {
+		Formatter fmt = new Formatter();
+		String fmt_tar = fmt.format(tar);
+		String fmt_ori = fmt.format(ori);
+		
+		String tar_varNames[] = getVarNames(fmt_tar);
+		String ori_varNames[] = getVarNames(fmt_ori);
+		
+		String logicTar = join(fmt_tar.split(join(tar_varNames, "|")),"");
+		String logicOri = join(fmt_ori.split(join(ori_varNames, "|")),"");
+		
+		// Must call revised LCS (more general version with getTok moved outside LCS)
+		return checkSimilarity(logicTar, logicOri);
+	}
+	protected String[] getVarNames(String source) {
 		String varNames[];
 		varNames = source.split(join(keywords, "|"));
 		return varNames;
 	}
-	
-	private String[] keywords={"abstract","continue", "for", "new", "switch", "assert***", "default", "goto*", "package", "synchronized", "boolean", "do", "if", "private", "this", 
+	protected String[] keywords={"abstract","continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", 
 			"break", "double", "implements", "protected", "throw", 
 			"byte", "else", "import", "public", "throws", 
-			"case", "enum****", "instanceof", "return", "transient", 
+			"case", "enum", "instanceof", "return", "transient", 
 			"catch", "extends", "int", "short", "try", 
 			"char", "final", "interface", "static", "void", 
-			"class", "finally", "long", "strictfp**", "volatile", 
-			"const*", "float", "native", "super", "while", "true", "false", "null",
-			"=", "+", "-", "*", "/", "%", "++", "--", "!", "==", "!=", ">", ">=", "<",
-			"<=", "&&", "||", "?", ":", "instanceof", "~", "<<", ">>", ">>>", "&", "^", "|"
+			"class", "finally", "long", "strictfp", "volatile", 
+			"const", "float", "native", "super", "while", "true", "false", "null",
+			"\'.*\'", "\".*\"","\\p{Punct}\\p{Digit}*", "\\p{Space}\\p{Digit}*"
 			};
-	private String join(String []arr, String sep) {
+	protected String join(String []arr, String sep) {
 		String result="";
 		int length=arr.length;
 		for(int i=0;i<length;++i)
 			result += arr[i]+sep;
 		return result;
+	}
+	protected boolean isVar(String token) {
+		return !java.util.regex.Pattern.matches(join(keywords, "|")+"|\\p{Digit}+.*", token);
 	}
 }
 
