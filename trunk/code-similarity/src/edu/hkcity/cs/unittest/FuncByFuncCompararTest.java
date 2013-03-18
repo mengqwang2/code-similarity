@@ -87,6 +87,7 @@ public class FuncByFuncCompararTest {
 	}*/
 	
 	@Test
+	/*
 	public void testGetVarNames() {
 		class FuncStub extends FuncByFuncComparar {
 			public String testGetVarN(String source) {
@@ -107,5 +108,17 @@ public class FuncByFuncCompararTest {
 		//assertEquals(result, "var1var2var3");
 		boolean result = fc.testIsVar("abc");
 		assertEquals(result, true);
+	}
+	*/
+	
+	public void testBuildRegex() {
+		class FuncStub extends FuncByFuncComparar {
+			public String testBuildRegex(String str, String tar){
+				return this.replace(str, tar);
+			}
+		}
+		FuncStub fc = new FuncStub();
+		String result = fc.testBuildRegex("for(   a=0;a!=10;a++){k=a+c+d;   a+=10;b+c+d}","for(i=0;i!=10;i++){k=i+n+m;i+=10;b+n+m}");
+		assertEquals(result, "for(a=0;a!=10;a++){k=a+c+d;a+=10;b+c+d}");
 	}
 }

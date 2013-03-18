@@ -3,7 +3,9 @@ package edu.hkcity.cs;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.*;
 
 public class FuncByFuncComparar extends Comparar{
 	public FuncByFuncComparar() {
@@ -239,6 +241,72 @@ public class FuncByFuncComparar extends Comparar{
 	protected boolean isVar(String token) {
 		return !java.util.regex.Pattern.matches(join(keywords, "|")+"|\\p{Digit}+.*", token);
 	}
-}
+
+
+	    protected String replace(String str, String tar){
+	    	str = str.replaceAll(" ", "");
+	    	tar = tar.replaceAll(" ", "");
+	    	
+	        // String to be scanned to find the pattern.
+	        String pattern = "(\\p{Punct})";
+
+	        // Create a Pattern object
+	        Pattern r = Pattern.compile(pattern);
+
+	        Matcher m = r.matcher(str);
+
+	        StringBuffer sb = new StringBuffer();
+
+	        while (m.find( )) {
+	                m.appendReplacement(sb, "\\\\"+m.group());
+	        }
+	        m.appendTail(sb);
+	        str = sb.toString();
+
+	        // String to be scanned to find the pattern.
+
+	        String var_pattern = "(\\w+)";
+
+	        // Create a Pattern object
+	        Pattern var_r = Pattern.compile(var_pattern);
+
+	        // Now create matcher object.
+	        Vector<String> var = new Vector<String>();
+
+	        Matcher var_m = var_r.matcher(str);
+
+	        StringBuffer var_sb = new StringBuffer();
+
+	        while (var_m.find( )) {
+	          //System.out.print(Integer.toString(var.indexOf(var_m.group())+1)+"\n");
+	          if (isVar( var_m.group() )) {
+	              int index = var.indexOf(var_m.group());
+	              if ( index == -1) {
+	                    var.add(var_m.group());
+	                    var_m.appendReplacement(var_sb, "(\\\\w*?)");
+	              } else {
+	                    var_m.appendReplacement(var_sb, "\\\\"+Integer.toString(index+1));
+	              }
+	          }
+	        }
+	        var_m.appendTail(var_sb);	    
+	        
+	        String re_pattern = var_sb.toString();
+
+	        // Create a Pattern object
+	        Pattern re_r = Pattern.compile(re_pattern);
+	        Matcher re_m = re_r.matcher(tar);	
+	        re_m.find( );
+	        int numMatches = re_m.groupCount();
+	        for(int i=0; i!=numMatches; ++i) {
+	        	tar = tar.replaceAll(re_m.group(i+1), var.get(i));
+	        }
+	        
+	        return tar;
+	    }
+	}
+
+
+
 
  
