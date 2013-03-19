@@ -41,8 +41,8 @@ public class FuncByFuncComparar extends Comparar{
 		//String original = fmt.format(getOri());
 		String target = getTar();
 		String original = getOri();
-		ArrayList<String> targetFuncList=splitFunction(target);
-		ArrayList<String> originalFuncList=splitFunction(original);
+		ArrayList<String> targetFuncList=fmt.splitFunction(target);
+		ArrayList<String> originalFuncList=fmt.splitFunction(original);
 		
 		boolean oriFuncPaired[] = new boolean[originalFuncList.size()];
 		double sims[] = new double [Math.max(targetFuncList.size(), originalFuncList.size())];
@@ -83,22 +83,6 @@ public class FuncByFuncComparar extends Comparar{
 		output.print(result);
 		
 		return result;	
-	}
-	private ArrayList<String> splitFunction(String program){
-		ArrayList<String> funcList=new ArrayList<String>();
-		Pattern pattern = Pattern.compile("[\\w\\*]* [\\w]*\\((.*)\\)[ \\r\\n]*\\{",Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(program);
-    	int start=0;
-    	int nextStart=0;
-        while(matcher.find()){
-        	start=nextStart;
-        	nextStart=matcher.start();
-	        if(start!=0){
-	        	funcList.add(program.substring(start,nextStart).replaceAll("[\\r\\n\\s]+$",""));
-	        }
-        }
-    	funcList.add(program.substring(nextStart,program.length()).replaceAll("[\\r\\n\\s]+$",""));
-		return funcList;
 	}
 	public String[] getTokP(String str){
 		return getTok(str);
