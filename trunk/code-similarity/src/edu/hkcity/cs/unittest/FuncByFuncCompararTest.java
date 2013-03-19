@@ -87,7 +87,56 @@ public class FuncByFuncCompararTest {
 	}*/
 	
 	@Test
+	public void testCompare_2() {
+		String ori = "int main () { x();}";
+		String tar = "int main () { y();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "0.5");
+	}
+	
+	@Test
+	public void testCompare_3() {
+		String ori = "int main () { x();y();z();}";
+		String tar = "int main () { y();z();x();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "0.75");
+	}
+	
+	@Test
+	public void testCompare_4() {
+		String ori = "int ha () { }";
+		String tar = "int main () { y();z();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "0.0");
+	}
+	
+	@Test
+	public void testCompare_5() {
+		
+		String ori = "int main () { y();z();}";
+		String tar = "int ha () { }";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "0.0");
+	}
+	
+	@Test
+	public void testCompare_6() {
+		String ori = "int main () { y();z(); }";
+		String tar = "int main () { }";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "1.0");
+	}
+	
+	@Test
+	public void testCompare_7() {
+		String ori = "int main () { y();z(); }";
+		String tar = "int main () { a();b();c();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(), "0.25");
+	}
+	
 	/*
+	@Test
 	public void testGetVarNames() {
 		class FuncStub extends FuncByFuncComparar {
 			public String testGetVarN(String source) {
@@ -110,7 +159,7 @@ public class FuncByFuncCompararTest {
 		assertEquals(result, true);
 	}
 	*/
-	
+	@Test
 	public void testBuildRegex() {
 		class FuncStub extends FuncByFuncComparar {
 			public String testBuildRegex(String str, String tar){
