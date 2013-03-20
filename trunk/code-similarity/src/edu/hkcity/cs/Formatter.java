@@ -58,10 +58,10 @@ public class Formatter {
 	        			tmpStr = new StringBuffer();
 	        		else if (st.hasMoreTokens())
 	        			tmpStr.append(',');
-	        			
 	        	}
 	        	lastEnd = end;
 	        }
+	        if (resStr.charAt(resStr.length()-1) == ',') resStr.replace(resStr.length()-1, resStr.length(), ";");
 	        resStr.append(funcList.get(n).substring(lastEnd));
 	        funcList.set(n, resStr.toString());
 		}
