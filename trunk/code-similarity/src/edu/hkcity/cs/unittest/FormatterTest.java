@@ -110,10 +110,34 @@ public class FormatterTest {
 		String str = "\n\r\n";
 		assertEquals("", fm.format(str) );
 	}
-	
+
 	@Test 
 	public void testDeleteBlankLine_3() {
 		String str = "\r\n\r\nO\r\n\r\n\r\n\rK\n\r\n!\r\n";
 		assertEquals("O\nK\n!\n", fm.format(str) );
+	}
+	
+	@Test 
+	public void testVariableDeclaration_1() {
+		String str = "int main(){\nint a;\n}";
+		assertEquals("int main(){\n}", fm.formatVariableDeclaration(str) );
+	}
+	
+	@Test 
+	public void testVariableDeclaration_2() {
+		String str = "int main(){\nint a=1;\n}";
+		assertEquals("int main(){\na=1;\n}", fm.formatVariableDeclaration(str) );
+	}
+	
+	@Test 
+	public void testVariableDeclaration_3() {
+		String str = "int main(){\nint a=1,b,c=3,d=2/2,e=time(NULL);\n}";
+		assertEquals("int main(){\na=1,c=3,d=2/2,e=time(NULL);\n}", fm.formatVariableDeclaration(str) );
+	}
+	
+	@Test 
+	public void testVariableDeclaration_4() {
+		String str = "int main(){\nint a=test(1,2.3,\"tes\");\n}";
+		assertEquals("int main(){\na=test(1,2.3,\"tes\");\n}", fm.formatVariableDeclaration(str) );
 	}
 }
