@@ -2,7 +2,10 @@ package edu.hkcity.cs;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.*;
@@ -162,7 +165,76 @@ public class FuncByFuncComparar extends Comparar{
 		return (double)interSim/totalLine;
 	}
 	
-	// Jenny & Benson
+	// Jenny & Benson  Cosine similarity
+	/*
+	 * Cosine similarity is a measure of similarity between two vectors 
+	 * of an inner product space that measures the cosine of the angle between 
+	 * them. The cosine of 0 is 1, and less than 1 for any other angle; the lowest 
+	 * value of the cosine is -1. The cosine of the angle between two vectors 
+	 * thus determines whether two vectors are pointing in roughly the same direction.
+	 * input:
+	 * 		two formatted string, i.e remove redundant spaces with one space
+	 * output:
+	 * 		cosine similarity of input strings;
+	 */
+	public static double CosSimliar(String str1, String str2) 
+    { 
+        Map<String, int[]> vectorSpace = new HashMap<String, int[]>(); 
+        int[] itemCountArray = null;
+         
+        //get tokens,split by space
+        String strArray[] = str1.split(" "); 
+        for(int i=0; i<strArray.length; ++i) 
+        { 
+            if(vectorSpace.containsKey(strArray[i])) 
+                ++(vectorSpace.get(strArray[i])[0]); 
+            else 
+            { 
+                itemCountArray = new int[2]; 
+                itemCountArray[0] = 1; 
+                itemCountArray[1] = 0; 
+                vectorSpace.put(strArray[i], itemCountArray); 
+            } 
+        } 
+         
+        strArray = str2.split(" "); 
+        for(int i=0; i<strArray.length; ++i) 
+        { 
+            if(vectorSpace.containsKey(strArray[i])) 
+                ++(vectorSpace.get(strArray[i])[1]); 
+            else 
+            { 
+                itemCountArray = new int[2]; 
+                itemCountArray[0] = 0; 
+                itemCountArray[1] = 1; 
+                vectorSpace.put(strArray[i], itemCountArray); 
+            } 
+        } 
+         
+        //calculate
+        double vector1Modulo = 0.00;
+        double vector2Modulo = 0.00;
+        double vectorProduct = 0.00;
+        Iterator iter = vectorSpace.entrySet().iterator(); 
+         
+        while(iter.hasNext()) 
+        { 
+            Map.Entry entry = (Map.Entry)iter.next(); 
+            itemCountArray = (int[])entry.getValue(); 
+             
+            vector1Modulo += itemCountArray[0]*itemCountArray[0]; 
+            vector2Modulo += itemCountArray[1]*itemCountArray[1]; 
+             
+            vectorProduct += itemCountArray[0]*itemCountArray[1]; 
+        } 
+         
+        vector1Modulo = Math.sqrt(vector1Modulo); 
+        vector2Modulo = Math.sqrt(vector2Modulo); 
+         
+       
+       return (vectorProduct/(vector1Modulo*vector2Modulo)); 
+    }
+	//jenny & Benson
 	public double calSameVar(String []tar,String[] ori)
     {
         int count=0;
@@ -222,6 +294,9 @@ public class FuncByFuncComparar extends Comparar{
 			result += arr[i]+sep;
 		return result;
 	}
+	
+	
+	
 	protected boolean isVar(String token) {
 		return !java.util.regex.Pattern.matches(join(keywords, "|")+"|\\p{Digit}+.*", token);
 	}
