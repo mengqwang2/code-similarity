@@ -120,7 +120,7 @@ public class FormatterTest {
 	@Test 
 	public void testVariableDeclaration_1() {
 		String str = "int main(){\nint a;\n}";
-		assertEquals("int main(){\n}", fm.formatVariableDeclaration(str) );
+		assertEquals("int main(){\n\n}", fm.formatVariableDeclaration(str) );
 	}
 	
 	@Test 
@@ -131,13 +131,25 @@ public class FormatterTest {
 	
 	@Test 
 	public void testVariableDeclaration_3() {
-		String str = "int main(){\nint a=1,b,c=3,d=2/2,e=time(NULL);\n}";
+		String str = "int main(){\nint __a,a=1,b,c=3,d=2/2,e=time(NULL);\n}";
 		assertEquals("int main(){\na=1,c=3,d=2/2,e=time(NULL);\n}", fm.formatVariableDeclaration(str) );
 	}
 	
 	@Test 
 	public void testVariableDeclaration_4() {
-		String str = "int main(){\nint a=test(1,2.3,\"tes\");\n}";
-		assertEquals("int main(){\na=test(1,2.3,\"tes\");\n}", fm.formatVariableDeclaration(str) );
+		String str = "int main(){\nint a=test(1,2.3,\"test\"),c;\n}";
+		assertEquals("int main(){\na=test(1,2.3,\"test\");\n}", fm.formatVariableDeclaration(str) );
+	}
+	
+	@Test 
+	public void testVariableDeclaration_5() {
+		String str = "int main(){\nint** a=new int[5][5];\nint **a=new int[5][5];\nint a[5][5]={};\n}";
+		assertEquals("int main(){\na=new int[5][5];\n**a=new int[5][5];\na[5][5]={};\n}", fm.formatVariableDeclaration(str) );
+	}
+	
+	@Test 
+	public void testVariableDeclaration_6() {
+		String str = "int main(){\nint a=test(1==2,2!=3,b(c++),\"test(1,2,\\\"test\\\")\"),b=(1+2-c());\nMyClass obj1,object=new otherClass(__a()),obj2;\n}";
+		assertEquals("int main(){\na=test(1==2,2!=3,b(c++),\"test(1,2,\\\"test\\\")\"),b=(1+2-c());\nobject=new otherClass(__a());\n}", fm.formatVariableDeclaration(str) );
 	}
 }
