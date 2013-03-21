@@ -33,7 +33,7 @@ public class Formatter {
 		return formattedString;
 	}
 	public String formatVariableDeclaration(String str){
-		ArrayList<String> funcList=splitFunction(str);
+		ArrayList<String> funcList=Utility.splitFunction(str);
 		for(int n=0;n<funcList.size();n++){
 			Pattern pattern = Pattern.compile("[a-zA-Z_][\\w_:<>]*[*]* [*]*[A-Za-z_][\\w_]*.*?;");
 	        Matcher matcher = pattern.matcher(funcList.get(n));
@@ -105,22 +105,5 @@ public class Formatter {
 		String resStr = str.substring(start+1);
 		if (!resStr.endsWith(";")) resStr+=",";
 		return resStr;
-	}
-	
-	public ArrayList<String> splitFunction(String program){
-		ArrayList<String> funcList=new ArrayList<String>();
-		Pattern pattern = Pattern.compile("[\\w\\*]* [\\w]*\\((.*)\\)[ \\r\\n]*\\{",Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(program);
-    	int start=0;
-    	int nextStart=0;
-        while(matcher.find()){
-        	start=nextStart;
-        	nextStart=matcher.start();
-	        if(start!=0){
-	        	funcList.add(program.substring(start,nextStart).replaceAll("[\\r\\n\\s]+$",""));
-	        }
-        }
-    	funcList.add(program.substring(nextStart,program.length()).replaceAll("[\\r\\n\\s]+$",""));
-		return funcList;
 	}
 }
