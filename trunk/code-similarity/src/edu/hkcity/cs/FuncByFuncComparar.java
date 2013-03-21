@@ -64,10 +64,10 @@ public class FuncByFuncComparar extends Comparar{
 			}
 		}
 		
-		
-		String result = Double.toString(calSimilarity(sims, lnt));
-		
-		output.print(result);
+		double sim=calSimilarity(sims, lnt);
+		String result = Double.toString(sim);
+
+		output.print("Function Similarity",sim);
 		
 		return result;	
 	}

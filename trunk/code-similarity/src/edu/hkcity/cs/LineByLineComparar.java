@@ -35,8 +35,8 @@ public class LineByLineComparar extends Comparar{
 		}
 		
 		String result = Double.toString(count/tarLength);
-		
-		output.print(result);
+
+		output.print("Line By Line Similarity",count/tarLength);
 		
 		return result;
 	}
