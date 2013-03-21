@@ -12,17 +12,22 @@ import java.util.regex.Pattern;
  *	The utilities
  */
 public class Utility {
-	// Predetermined keywords and operators, extensible
-	protected static String[] keywords={"abstract","continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", 
+	// Predetermined keywords, operators and values, extensible
+	protected static String[] keywords={
+			// keywords
+			"abstract","continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", 
 			"break", "double", "implements", "protected", "throw", 
 			"byte", "else", "import", "public", "throws", 
 			"case", "enum", "instanceof", "return", "transient", 
 			"catch", "extends", "int", "short", "try", 
 			"char", "final", "interface", "static", "void", 
 			"class", "finally", "long", "strictfp", "volatile", 
-			"const", "float", "native", "super", "while", "true", "false", "null",
-			"\'.*\'", "\".*\"","\\p{Punct}\\p{Digit}*", "\\p{Space}\\p{Digit}*", "|\\p{Digit}+.*"
-			};
+			"const", "float", "native", "super", "while", 
+			// values
+			"true", "false", "null", "\'.*\'", "\".*\"",
+			// punctuation and blank
+			"\\p{Punct}", "\\p{Space}"
+	};
 	
 	// Join elements in an array to a string with a delimiter
 	// Input: String[]
@@ -30,8 +35,9 @@ public class Utility {
 	public static String join(String []arr, String delimiter) {
 		String result="";
 		int length=arr.length;
-		for(int i=0;i<length;++i)
+		for(int i=0;i<length-1;++i)
 			result += arr[i]+delimiter;
+		result += arr[length-1];
 		return result;
 	}
 	
@@ -39,7 +45,25 @@ public class Utility {
 	// Input: String
 	// Output: boolean
 	public static boolean isVar(String token) {
-		return !java.util.regex.Pattern.matches(join(keywords, "|"), token);
+		return (java.util.regex.Pattern.matches("[a-zA-Z]\\w*", token)
+				&&	!java.util.regex.Pattern.matches(join(keywords, "|"), token)
+				);
+	}
+	
+	// Remove duplicate element in an string array
+	// Input: String[]
+	// Output String[]
+	public static String[] removeDuplicate(String[] arr) {
+		ArrayList<String> result = new ArrayList<String>();
+		int length=arr.length;
+		
+		for(int i=0;i<length;++i) {
+			String s = arr[i];
+			if(!result.contains(s))
+				result.add(s);
+		}
+		
+		return result.toArray(new String[result.size()]);
 	}
 	
 	// Extract a list of variable names from a string based on predetermined keywords
@@ -47,7 +71,8 @@ public class Utility {
 	// Output: String[]
 	public static String[] extractVarNames(String source) {
 		String[] varNames;
-		varNames = source.split(join(keywords, "|"));
+		varNames = source.split("\\W+\\d*|"+join(keywords, "|"));
+		varNames = removeDuplicate(varNames);
 		return varNames;
 	}
 	
@@ -91,7 +116,7 @@ public class Utility {
 		return C[n][m]*1.0/n;
 	}
 	
-	// To be rename, please clarify the functionality here
+	// To be rename? please clarify the functionality here
 	public String[] getTok(String str){
 	      // String to be scanned to find the pattern.
 	      String pattern = "(\\w+)";
