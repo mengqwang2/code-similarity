@@ -29,19 +29,19 @@ public class PercentageOutputTest {
 
 	@Test
 	public void testPrint_1() {
-		po.print("0.333333333");
-		assertEquals("33.33%\n", output.toString());
+		po.print("name", 0.333333333);
+		assertEquals("name : 33.33%\n", output.toString());
 	}
 	
 	@Test
 	public void testPrint_2() {
-		po.print("1");
-		assertEquals("100.00%\n", output.toString());
+		po.print("123Comparar", 1);
+		assertEquals("123Comparar : 100.00%\n", output.toString());
 	}
 	
 	@Test
 	public void testPrint_3() {
-		po.print("0.99");
-		assertEquals("99.00%\n", output.toString());
+		po.print("yo", 0.99);
+		assertEquals("yo : 99.00%\n", output.toString());
 	}
 }
