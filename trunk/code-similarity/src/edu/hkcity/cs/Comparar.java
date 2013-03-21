@@ -8,9 +8,10 @@ public abstract class Comparar{
 	public Comparar(String tar,String ori){
 		this.setTar(tar);
 		this.setOri(ori);
+		info = "Abstract Comparar";
 	}
 	// Compare two formatted strings
-	public abstract String compare();
+	public abstract String compare(Formatter fmt, Output output);
 	
 	private void setTar(String tar) {
 		this.tar = tar;
@@ -27,4 +28,6 @@ public abstract class Comparar{
 
 	private String tar;
 	private String ori;
+	protected String info;
+	
 }
