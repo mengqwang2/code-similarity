@@ -43,7 +43,7 @@ public class UtilityTest {
 	
 	@Test
 	public void testIsVar3() {
-		boolean result = Utility.isVar(":var?");
+		boolean result = Utility.isVar("areyoukiddingme?");
 		assertEquals(result, false);
 	}
 	
@@ -71,7 +71,7 @@ public class UtilityTest {
 	public void testExtractVarNames3() {
 		String testStr = "ArrayList<String> result = new ArrayList<String>();int length=arr.length;for(int i=0;i<length;++i) {String s = arr[i];if(!result.contains(s))result.add(s);}return result.toArray(new String[result.size()]);";
 		String result = Utility.join(Utility.extractVarNames(testStr),"");
-		assertEquals(result, "ArrayListStringresultlengtharriscontainsaddtoArraysize");
+		assertEquals(result, "ArrayListStringresultnewlengtharriscontainsaddtoArraysize");
 	}
 	
 	@Test
@@ -80,20 +80,28 @@ public class UtilityTest {
 		String result = Utility.join(Utility.extractVarNames(testStr),"");
 		assertEquals(result, "javautilregexPatternmatchesazAZwtokenjoinkeywords");
 	}
-	/*
+	
 	@Test
-	public void testLcs() {
-		fail("Not yet implemented");
+	public void testLcs1() {
+		String[] token1={"abc","def","acd","ert"};
+		String[] token2={"abc","dgd","def","gdf","sdfa"};
+		String result = Double.toString(Utility.lcs(token1, token2));
+		assertEquals(result, "0.5");
 	}
-
+	
 	@Test
-	public void testGetTok() {
-		fail("Not yet implemented");
+	public void testLcs2() {
+		String[] token1={"abd","def","acd","ert"};
+		String[] token2={"abc","dgd","del","gdf","sdfa"};
+		String result = Double.toString(Utility.lcs(token1, token2));
+		assertEquals(result, "0.0");
 	}
-
+	
 	@Test
-	public void testCosSimliar() {
-		fail("Not yet implemented");
+	public void testLcs3() {
+		String[] token1={"abd","def","acd","ert"};
+		String[] token2={"abd","def","acd","ert"};
+		String result = Double.toString(Utility.lcs(token1, token2));
+		assertEquals(result, "1.0");
 	}
-	*/
 }
