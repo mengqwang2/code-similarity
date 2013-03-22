@@ -25,7 +25,7 @@ public class RegexCompararTest {
 		String result = Double.toString(comp.testCalRS(code1, code2));
 		assertEquals(result, "1.0");
 	}
-		
+	
 	@Test
 	public void testCalRegedSim2() {
 		class RegexStub extends RegexComparar {
@@ -33,8 +33,8 @@ public class RegexCompararTest {
 				return calRegedSim(tar, ori);
 			}
 		}
-		String code1 = "E=mc^2";
-		String code2 = "P=pir^2";
+		String code1 = "E=m*(c^2)";
+		String code2 = "P=PI*(r^2)";
 		RegexStub comp = new RegexStub();
 		String result = Double.toString(comp.testCalRS(code1, code2));
 		assertEquals(result, "1.0");
@@ -47,8 +47,22 @@ public class RegexCompararTest {
 				return calRegedSim(tar, ori);
 			}
 		}
-		String code1 = "E=mc^2 is the most famous formula";
-		String code2 = "Omg=omg^100 are you kidding me?";
+		String code1 = "E=m*(c^2)";
+		String code2 = "P=PI*(r^2)";
+		RegexStub comp = new RegexStub();
+		String result = Double.toString(comp.testCalRS(code1, code2));
+		assertEquals(result, "1.0");
+	}
+	
+	@Test
+	public void testCalRegedSim4() {
+		class RegexStub extends RegexComparar {
+			public double testCalRS(String tar, String ori) {
+				return calRegedSim(tar, ori);
+			}
+		}
+		String code1 = "E=m*(c^2) is the most famous formula";
+		String code2 = "Omg=omg*(omg^2) are you kidding me that they are the same!?";
 		RegexStub comp = new RegexStub();
 		String result = Double.toString(comp.testCalRS(code1, code2));
 		assertEquals(result, "1.0");
