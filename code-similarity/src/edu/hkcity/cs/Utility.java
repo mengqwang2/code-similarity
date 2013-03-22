@@ -126,8 +126,7 @@ public class Utility {
 	      // Create a Pattern object
 	      Pattern r = Pattern.compile(pattern);
 
-	      // Now create matcher object.
-	      
+	      // Now create matcher object.	      
 	      Matcher m = r.matcher(str);
 	     
 	      List<String> allMatches= new ArrayList<String>();
@@ -141,9 +140,15 @@ public class Utility {
 	}
 	
 	// Coffee, to Utility or your new comparar class? Currently move it here
-    protected String replace(String str, String tar){
+    public static String replace(String str, String tar){
     	str = str.replaceAll(" ", "");
     	tar = tar.replaceAll(" ", "");
+    	
+    	if(str.length()>tar.length()) {
+    		String tmp = tar;
+    		tar = str;
+    		str = tmp;
+    	}
     	
         // String to be scanned to find the pattern.
         String pattern = "(\\p{Punct})";
@@ -156,7 +161,11 @@ public class Utility {
         StringBuffer sb = new StringBuffer();
 
         while (m.find( )) {
-                m.appendReplacement(sb, "\\\\"+m.group());
+        	String escape_punct = "\\\\"+m.group();
+        	if(m.group().toString().equals(";")||m.group().equals("{")){
+        		escape_punct += "(?:.*?)?";
+        	} 	
+            m.appendReplacement(sb, escape_punct);
         }
         m.appendTail(sb);
         str = sb.toString();
@@ -190,6 +199,7 @@ public class Utility {
         var_m.appendTail(var_sb);	    
         
         String re_pattern = var_sb.toString();
+        System.out.print(re_pattern+"\n");
 
         // Create a Pattern object
         Pattern re_r = Pattern.compile(re_pattern);
@@ -197,9 +207,12 @@ public class Utility {
         re_m.find( );
         int numMatches = re_m.groupCount();
         for(int i=0; i!=numMatches; ++i) {
-        	tar = tar.replaceAll(re_m.group(i+1), var.get(i));
+        	String toBeReplaced = "\\b"+re_m.group(i+1)+"\\b";
+        	String middlewareReplacement = "0R"+var.get(i);
+        	System.out.print(toBeReplaced+"\n");
+        	tar = tar.replaceAll(toBeReplaced, middlewareReplacement);
         }
-        
+        tar = tar.replaceAll("\\b0R", "");
         return tar;
     }
     

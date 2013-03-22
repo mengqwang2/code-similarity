@@ -33,10 +33,19 @@ public class FuncByFuncComparar extends Comparar{
 				if(oriFuncPaired[j]) continue;
 				// !! need negotiation getTok's name should be changed later
 				// need refactor, notice that checkSimilarity() is moved to Utility and renamed as lcs() and the parameters have been changed
-				String[] tarFunToken = Utility.getTok(targetFuncList.get(i));
-				String[] oriFunToken = Utility.getTok(originalFuncList.get(j));
+				String tarFunc = targetFuncList.get(i);
+				String oriFunc = originalFuncList.get(j);
+				if(tarFunc.length() < oriFunc.length()) {
+					oriFunc = Utility.replace(tarFunc, oriFunc);
+				} else {
+					tarFunc = Utility.replace(tarFunc, oriFunc);
+				}
+				
+				String[] tarFunToken = Utility.getTok(tarFunc);
+				String[] oriFunToken = Utility.getTok(oriFunc);
 				
 				double sim = Utility.lcs(tarFunToken, oriFunToken);
+				
 				if(sim > max_sim) {
 					max_j = j;
 					max_sim = sim;
@@ -67,6 +76,7 @@ public class FuncByFuncComparar extends Comparar{
 		
 		return Double.toString(result);	
 	}
+	
 	
 	private double calSimilarity(double sims[], int lnt[]){
 		double interSim=0;
