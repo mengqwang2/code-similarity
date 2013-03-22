@@ -1,5 +1,7 @@
 package edu.hkcity.cs;
 
+import java.util.Arrays;
+
 public class RegexComparar extends Comparar{
 	// Constructor
 	public RegexComparar() {
@@ -27,8 +29,22 @@ public class RegexComparar extends Comparar{
 		String[] tarVars = Utility.extractVarNames(tar);
 		String[] oriVars = Utility.extractVarNames(ori);
 		
-		String[] regedTar = tar.split(" |"+Utility.join(tarVars, "|"));
-		String[] regedOri = ori.split(" |"+Utility.join(oriVars, "|"));
+		Arrays.sort(tarVars);
+		Arrays.sort(oriVars);
+		
+		int tar_length = tarVars.length;
+		int ori_length = oriVars.length;
+		
+		String[] sortedTar = new String[tar_length];
+		String[] sortedOri = new String[ori_length];
+		
+		for(int i=0;i<tar_length;++i)
+			sortedTar[i] = tarVars[tar_length-1-i];
+		for(int i=0;i<ori_length;++i)
+			sortedOri[i] = oriVars[ori_length-1-i];
+		
+		String[] regedTar = tar.split("\\s|;|"+Utility.join(sortedTar, "|"));
+		String[] regedOri = ori.split("\\s|;|"+Utility.join(sortedOri, "|"));
 		
 		return Utility.lcs(regedTar, regedOri);
 	}
