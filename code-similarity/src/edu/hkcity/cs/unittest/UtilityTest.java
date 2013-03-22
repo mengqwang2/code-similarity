@@ -31,7 +31,7 @@ public class UtilityTest {
 	
 	@Test
 	public void testIsVar1() {
-		boolean result = Utility.isVar("abcd");
+		boolean result = Utility.isVar("_myVar");
 		assertEquals(result, true);
 	}
 	
@@ -55,7 +55,7 @@ public class UtilityTest {
 	
 	@Test
 	public void testExtractVarNames1() {
-		String testStr = "int a=0, b=0; int c = a+b;";
+		String testStr = "int a=0, b=\"joke\"; int c = a+b;";
 		String result = Utility.join(Utility.extractVarNames(testStr),"");
 		assertEquals(result, "abc");
 	}
@@ -78,7 +78,7 @@ public class UtilityTest {
 	public void testExtractVarNames4() {
 		String testStr = "return (java.util.regex.Pattern.matches(\"[a-zA-Z]\\w*\", token)&&	!java.util.regex.Pattern.matches(join(keywords, \"|\"), token));";
 		String result = Utility.join(Utility.extractVarNames(testStr),"");
-		assertEquals(result, "javautilregexPatternmatchesazAZwtokenjoinkeywords");
+		assertEquals(result, "javautilregexPatternmatchestokenjoinkeywords");
 	}
 	
 	@Test
