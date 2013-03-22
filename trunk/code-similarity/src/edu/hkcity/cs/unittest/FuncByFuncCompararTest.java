@@ -14,7 +14,7 @@ public class FuncByFuncCompararTest {
 	@Before
 	public void setUp() throws Exception {
 	}
-		
+
 	@Test
 	public void testCompare_1() {
 		String ori = "int main () { x();}";
@@ -22,7 +22,7 @@ public class FuncByFuncCompararTest {
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "0.5");
 	}
-	
+
 	@Test
 	public void testCompare_2() {
 		String ori = "int main () { x();y();z();}";
@@ -30,24 +30,25 @@ public class FuncByFuncCompararTest {
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "0.75");
 	}
-	
+
 	@Test
 	public void testCompare_3() {
 		String ori = "int ha () { }";
 		String tar = "int main () { y();z();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "0.3333333333333333");
+		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+				"0.3333333333333333");
 	}
-	
+
 	@Test
 	public void testCompare_4() {
-		
+
 		String ori = "int main () { y();z();}";
 		String tar = "int ha () { }";
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "1.0");
 	}
-	
+
 	@Test
 	public void testCompare_5() {
 		String ori = "int main () { y();z(); }";
@@ -55,7 +56,7 @@ public class FuncByFuncCompararTest {
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "1.0");
 	}
-	
+
 	@Test
 	public void testCompare_6() {
 		String ori = "int main () { y();z(); }";

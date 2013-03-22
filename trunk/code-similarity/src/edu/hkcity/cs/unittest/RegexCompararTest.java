@@ -13,7 +13,7 @@ public class RegexCompararTest {
 	@Before
 	public void setUp() throws Exception {
 	}
-	
+
 	@Test
 	public void testCalRegedSim1() {
 		class RegexStub extends RegexComparar {
@@ -27,7 +27,7 @@ public class RegexCompararTest {
 		String result = Double.toString(comp.testCalRS(code1, code2));
 		assertEquals(result, "1.0");
 	}
-	
+
 	@Test
 	public void testCalRegedSim2() {
 		class RegexStub extends RegexComparar {
@@ -41,7 +41,7 @@ public class RegexCompararTest {
 		String result = Double.toString(comp.testCalRS(code1, code2));
 		assertEquals(result, "1.0");
 	}
-	
+
 	@Test
 	public void testCalRegedSim3() {
 		class RegexStub extends RegexComparar {
@@ -64,6 +64,7 @@ public class RegexCompararTest {
 		String result = comp.compare(new Formatter(), new PercentageOutput());
 		assertEquals(result, "1.0");
 	}
+
 	@Test
 	public void testCompare2() {
 		String code1 = "E\n=\tm*(c^2)\t\t\t";
@@ -72,6 +73,7 @@ public class RegexCompararTest {
 		String result = comp.compare(new Formatter(), new PercentageOutput());
 		assertEquals(result, "1.0");
 	}
+
 	@Test
 	public void testCompare3() {
 		String code1 = "E=m*(c^2)\n is the most famous formula and frankly I am kidding you";
