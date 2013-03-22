@@ -76,9 +76,4 @@ public class Input {
 	public void setTargetFile(String targetFile) {
 		this.targetFile = targetFile;
 	}
-	
-	public static void main(String[] args){
-		Input in=new Input();
-		in.getInput();
-	}
 }
