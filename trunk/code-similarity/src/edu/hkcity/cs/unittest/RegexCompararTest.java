@@ -19,8 +19,8 @@ public class RegexCompararTest {
 				return calRegedSim(tar, ori);
 			}
 		}
-		String code1 = "int main(){printf(\"hello world!\");return 1;}";
-		String code2 = "int main(){printf(\"hello world!\");return 1;}";
+		String code1 = "E=m*(c^2)";
+		String code2 = "P=PI*(r^2)";
 		RegexStub comp = new RegexStub();
 		String result = Double.toString(comp.testCalRS(code1, code2));
 		assertEquals(result, "1.0");
@@ -42,20 +42,6 @@ public class RegexCompararTest {
 	
 	@Test
 	public void testCalRegedSim3() {
-		class RegexStub extends RegexComparar {
-			public double testCalRS(String tar, String ori) {
-				return calRegedSim(tar, ori);
-			}
-		}
-		String code1 = "E=m*(c^2)";
-		String code2 = "P=PI*(r^2)";
-		RegexStub comp = new RegexStub();
-		String result = Double.toString(comp.testCalRS(code1, code2));
-		assertEquals(result, "1.0");
-	}
-	
-	@Test
-	public void testCalRegedSim4() {
 		class RegexStub extends RegexComparar {
 			public double testCalRS(String tar, String ori) {
 				return calRegedSim(tar, ori);
