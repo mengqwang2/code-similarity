@@ -22,6 +22,8 @@ public class RegexComparar extends Comparar{
 	
 	//
 	protected double calRegedSim(String tar, String ori) {
+		
+		
 		String[] tarVars = Utility.extractVarNames(tar);
 		String[] oriVars = Utility.extractVarNames(ori);
 		

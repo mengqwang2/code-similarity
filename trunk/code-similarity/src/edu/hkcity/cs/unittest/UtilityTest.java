@@ -104,4 +104,20 @@ public class UtilityTest {
 		String result = Double.toString(Utility.lcs(token1, token2));
 		assertEquals(result, "1.0");
 	}
+	
+	@Test 
+	public void testReplace1() {
+		String org = "foo(bar){for(i=0;i!=10;++i){i+=10;i=2;}}";
+		String tar = "bar(foo){for(a=0;a!=10;++a){a+=10;b=a+3;c+=a;a=2;a=3;a=4;}}";
+		String result = Utility.replace(org, tar);
+		assertEquals(result, "foo(bar){for(i=0;i!=10;++i){i+=10;b=i+3;c+=i;i=2;i=3;i=4;}}");
+	}
+	
+	@Test 
+	public void testReplace2() {
+		String org = "bar(foo){for(a=0;a!=10;++a){a+=10;b=a+3;c+=a;a=2;a=3;a=4;}}";
+		String tar = "foo(bar){for(i=0;i!=10;++i){i+=10;i=2;}}";
+		String result = Utility.replace(org, tar);
+		assertEquals(result, "foo(bar){for(i=0;i!=10;++i){i+=10;b=i+3;c+=i;i=2;i=3;i=4;}}");
+	}
 }
