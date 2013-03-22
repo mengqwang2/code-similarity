@@ -22,7 +22,7 @@ public class Utility {
 			// values
 			"true", "false", "null", "\'.*\'", "\".*\"",
 			// punctuation and blank
-			"\\p{Punct}"
+			"\\p{Punct}", "\\s"
 	};
 	
 	
@@ -43,7 +43,7 @@ public class Utility {
 	// Input: String
 	// Output: boolean
 	public static boolean isVar(String token) {
-		return (java.util.regex.Pattern.matches("[a-zA-Z]\\w*", token)
+		return (java.util.regex.Pattern.matches("(_|[a-zA-Z])\\w*", token)
 				&&	!java.util.regex.Pattern.matches(join(keywords, "|"), token)
 				);
 	}
@@ -70,10 +70,18 @@ public class Utility {
 	// Input: String
 	// Output: String[]
 	public static String[] extractVarNames(String source) {
-		String[] varNames;
-		varNames = source.split("\\W+\\d*|"+join(keywords, "|"));
-		varNames = removeDuplicate(varNames);
-		return varNames;
+		ArrayList<String> list = new ArrayList<String>();
+		String[] frag = source.split("\\s");
+		int fragLeng = frag.length;
+		String[][] vars = new String[fragLeng][];
+		for(int i=0; i<fragLeng; ++i) {
+			vars[i] = frag[i].split("(\'.*\')|(\".*\")|(\\W)");
+			int length=vars[i].length;
+			for(int j=0;j<length;++j)
+				if(isVar(vars[i][j]))
+					list.add(vars[i][j]);
+		}
+		return removeDuplicate(list.toArray(new String[list.size()]));
 	}
 	
 	
