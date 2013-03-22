@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.hkcity.cs.Formatter;
-import edu.hkcity.cs.Output;
 import edu.hkcity.cs.PercentageOutput;
 import edu.hkcity.cs.RegexComparar;
 
