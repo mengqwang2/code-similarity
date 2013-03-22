@@ -35,13 +35,13 @@ public class InputTest {
 		try {
 			FileWriter ori_fw = new FileWriter(ori_f, false);
 			FileWriter tar_fw = new FileWriter(tar_f, false);
-			
+
 			String inStr = "Hello world!";
 			ori_fw.write(inStr);
 			ori_fw.close();
 			tar_fw.write(inStr);
 			tar_fw.close();
-			
+
 			Input input = new Input("ori.txt", "tar.txt");
 			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
@@ -56,19 +56,15 @@ public class InputTest {
 		try {
 			FileWriter ori_fw = new FileWriter(ori_f, false);
 			FileWriter tar_fw = new FileWriter(tar_f, false);
-			
-			String inStr = 
-				"#include <stdio.h>;" +
-				"\n\n" +
-				"int main(){\n" +
-				"    printf(\"hello world!\\n\");\n" +
-				"    return 0;\n" +
-				"}\n";
+
+			String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
+					+ "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
+					+ "}\n";
 			ori_fw.write(inStr);
 			ori_fw.close();
 			tar_fw.write(inStr);
 			tar_fw.close();
-			
+
 			Input input = new Input("ori.txt", "tar.txt");
 			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
@@ -77,19 +73,19 @@ public class InputTest {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testInput_3() {
 		try {
 			FileWriter ori_fw = new FileWriter(ori_f, false);
 			FileWriter tar_fw = new FileWriter(tar_f, false);
-			
+
 			String inStr = "";
 			ori_fw.write(inStr);
 			ori_fw.close();
 			tar_fw.write(inStr);
 			tar_fw.close();
-			
+
 			Input input = new Input("ori.txt", "tar.txt");
 			input.getInput();
 			assertEquals(inStr, input.getOriginalFile());
