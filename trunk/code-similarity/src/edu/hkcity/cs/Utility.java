@@ -19,7 +19,7 @@ public class Utility {
 			"switch", "case", "enum", "register", "typedef", "char", "extern",
 			"return", "union", "const", "float", "short", "unsigned",
 			"continue", "for", "signed", "void", "default", "goto", "sizeof",
-			"volatile", "do", "if", "static", "while", "main",
+			"volatile", "do", "if", "static", "while", "main", "printf",
 			// values
 			"true", "false", "null", "\'.*\'", "\".*\"",
 			// punctuation and blank
