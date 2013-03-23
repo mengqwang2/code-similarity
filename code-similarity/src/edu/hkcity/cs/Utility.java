@@ -239,7 +239,7 @@ public class Utility {
 		var_m.appendTail(var_sb);
 
 		String re_pattern = var_sb.toString();
-		System.out.print(re_pattern + "\n");
+		//System.out.print(re_pattern + "\n");
 
 		// Create a Pattern object
 		Pattern re_r = Pattern.compile(re_pattern);
@@ -249,7 +249,7 @@ public class Utility {
 		for (int i = 0; i != numMatches; ++i) {
 			String toBeReplaced = "\\b" + re_m.group(i + 1) + "\\b";
 			String middlewareReplacement = "0R" + var.get(i);
-			System.out.print(toBeReplaced + "\n");
+			//System.out.print(toBeReplaced + "\n");
 			tar = tar.replaceAll(toBeReplaced, middlewareReplacement);
 		}
 		tar = tar.replaceAll("\\b0R", "");
