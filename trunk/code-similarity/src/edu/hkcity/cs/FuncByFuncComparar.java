@@ -28,8 +28,11 @@ public class FuncByFuncComparar extends Comparar {
 	}
 
 	// Overload compare()
-	/* (non-Javadoc)
-	 * @see edu.hkcity.cs.Comparar#compare(edu.hkcity.cs.Formatter, edu.hkcity.cs.Output)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see edu.hkcity.cs.Comparar#compare(edu.hkcity.cs.Formatter,
+	 * edu.hkcity.cs.Output)
 	 */
 	public String compare(Formatter fmt, Output output) {
 		// String target = fmt.format(getTar());
@@ -44,16 +47,14 @@ public class FuncByFuncComparar extends Comparar {
 				originalFuncList.size())];
 		int lnt[] = new int[sims.length];
 		int sims_i = 0, count_j = 0;
+
 		for (int i = 0; i < targetFuncList.size(); i++) {
 			double max_sim = -1;
 			int max_j = -1;
 			for (int j = 0; j < originalFuncList.size(); j++) {
 				if (oriFuncPaired[j])
 					continue;
-				// !! need negotiation getTok's name should be changed later
-				// need refactor, notice that checkSimilarity() is moved to
-				// Utility and renamed as lcs() and the parameters have been
-				// changed
+
 				String tarFunc = targetFuncList.get(i);
 				String oriFunc = originalFuncList.get(j);
 				if (tarFunc.length() < oriFunc.length()) {
@@ -82,6 +83,7 @@ public class FuncByFuncComparar extends Comparar {
 			}
 			sims[sims_i++] = max_sim;
 		}
+
 		if (count_j != originalFuncList.size()) {
 			for (int j = 0; j < originalFuncList.size(); j++) {
 				if (oriFuncPaired[j])
