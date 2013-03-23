@@ -162,7 +162,6 @@ public class Utility {
 
 		List<String> allMatches = new ArrayList<String>();
 		while (m.find()) {
-			// System.out.print(m.group());
 
 			allMatches.add(m.group());
 		}
@@ -180,31 +179,28 @@ public class Utility {
 	 * @return the string
 	 */
 	public static String replace(String str, String tar) {
-		str = str.replaceAll("[\n]", "");
-		tar = tar.replaceAll("[\n]", "");
+		str = str.replaceAll("[\n\\\\]", "");
+		tar = tar.replaceAll("[\n\\\\]", "");
 
 		if (str.length() > tar.length()) {
 			String tmp = tar;
 			tar = str;
 			str = tmp;
 		}
-		//System.out.print("Target func: "+tar+"\n");
-		//System.out.print("Origianl func:"+str+"\n");
 
 		// String to be scanned to find the pattern.
-		String pattern = "(\\p{Punct})";
-
+		String pattern = "([\\p{Punct}&&[^_]])";
 		// Create a Pattern object
 		Pattern r = Pattern.compile(pattern);
 
 		Matcher m = r.matcher(str);
 
 		StringBuffer sb = new StringBuffer();
-
+		
 		while (m.find()) {
 			String escape_punct = "\\\\" + m.group();
-			if (m.group().toString().equals(";") || m.group().equals("{")) {
-				escape_punct += "(?:.*?)?";
+			if (m.group().equals(";") || m.group().equals("{")) {
+				escape_punct = new String(escape_punct+"(?:.*?)?");
 			}
 			m.appendReplacement(sb, escape_punct);
 		}
@@ -213,7 +209,7 @@ public class Utility {
 
 		// String to be scanned to find the pattern.
 
-		String var_pattern = "(\\w+)";
+		String var_pattern = "([\\w_]+)";
 
 		// Create a Pattern object
 		Pattern var_r = Pattern.compile(var_pattern);
@@ -226,7 +222,7 @@ public class Utility {
 		StringBuffer var_sb = new StringBuffer();
 
 		while (var_m.find()) {
-			// System.out.print(Integer.toString(var.indexOf(var_m.group())+1)+"\n");
+
 			if (isVar(var_m.group())) {
 				int index = var.indexOf(var_m.group());
 				if (index == -1) {
