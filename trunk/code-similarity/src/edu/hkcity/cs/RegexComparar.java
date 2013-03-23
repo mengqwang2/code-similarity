@@ -24,6 +24,7 @@ public class RegexComparar extends Comparar {
 	 */
 	public RegexComparar(String tar, String ori) {
 		super(tar, ori);
+		info = "Comparar based on regex transformation";
 	}
 
 	/* (non-Javadoc)
@@ -32,10 +33,12 @@ public class RegexComparar extends Comparar {
 	public String compare(Formatter fmt, Output output) {
 		String target = fmt.format(getTar());
 		String original = fmt.format(getOri());
+		
+		Double result = calRegedSim(target, original);
+		
+		output.print(info, result);
 
-		String result = Double.toString(calRegedSim(target, original));
-
-		return result;
+		return Double.toString(result);
 	}
 
 	//
