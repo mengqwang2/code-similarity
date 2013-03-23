@@ -12,6 +12,7 @@ public class RegexComparar extends Comparar {
 	 */
 	public RegexComparar() {
 		super();
+		info = "Comparar based on regex transformation";
 	}
 
 	/**

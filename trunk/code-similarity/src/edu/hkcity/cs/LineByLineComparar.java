@@ -12,6 +12,7 @@ public class LineByLineComparar extends Comparar {
 	 */
 	public LineByLineComparar() {
 		super();
+		info = "LineByLine Comparar";
 	}
 
 	/**
