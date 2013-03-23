@@ -8,7 +8,7 @@ import org.junit.Test;
 import edu.hkcity.cs.Comparar;
 import edu.hkcity.cs.CosSimComparar;
 import edu.hkcity.cs.Formatter;
-import edu.hkcity.cs.PercentageOutput;
+import edu.hkcity.cs.Output;
 
 public class CosSimCompararTest {
 	private CosSimComparar cos = new CosSimComparar();
@@ -22,7 +22,7 @@ public class CosSimCompararTest {
 		String ori = "int main () { x();}";
 		String tar = "int main () { y();}";
 		Comparar c = new CosSimComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.7999999999999998");
 	}
 
@@ -31,7 +31,7 @@ public class CosSimCompararTest {
 		String ori = "int main () { x();y();z();}";
 		String tar = "int main () { y();z();x();}";
 		Comparar c = new CosSimComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.7999999999999998");
 	}
 
@@ -40,7 +40,7 @@ public class CosSimCompararTest {
 		String ori = "int ha () { }";
 		String tar = "int main () { y();z();}";
 		Comparar c = new CosSimComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.5999999999999999");
 	}
 
@@ -50,7 +50,7 @@ public class CosSimCompararTest {
 		String ori = "int main () { y();z();}";
 		String tar = "int ha () { }";
 		Comparar c = new CosSimComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.5999999999999999");
 	}
 
@@ -59,7 +59,7 @@ public class CosSimCompararTest {
 		String ori = "int main () { y();z(); }";
 		String tar = "int main () { }";
 		Comparar c = new CosSimComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.9128709291752769");
 	}
 
@@ -68,7 +68,7 @@ public class CosSimCompararTest {
 		String ori = "int main () { y();z(); }";
 		String tar = "int main () { a();b();c();}";
 		Comparar c = new CosSimComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.7302967433402214");
 	}
 

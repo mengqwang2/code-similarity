@@ -9,16 +9,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.hkcity.cs.PercentageOutput;
+import edu.hkcity.cs.Output;
 
-public class PercentageOutputTest {
+public class OutputTest {
 	private final ByteArrayOutputStream output = new ByteArrayOutputStream();
-	private PercentageOutput po;
+	private Output po;
 
 	@Before
 	public void setUp() {
 		System.setOut(new PrintStream(output));
-		po = new PercentageOutput();
+		po = new Output();
 	}
 
 	@After

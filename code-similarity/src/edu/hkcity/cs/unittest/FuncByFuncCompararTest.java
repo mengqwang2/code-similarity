@@ -8,7 +8,7 @@ import org.junit.Test;
 import edu.hkcity.cs.Comparar;
 import edu.hkcity.cs.FuncByFuncComparar;
 import edu.hkcity.cs.Formatter;
-import edu.hkcity.cs.PercentageOutput;
+import edu.hkcity.cs.Output;
 
 public class FuncByFuncCompararTest {
 	@Before
@@ -20,7 +20,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { x();}";
 		String tar = "int main () { y();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "0.5");
+		assertEquals(c.compare(new Formatter(), new Output()), "0.5");
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { x();y();z();}";
 		String tar = "int main () { y();z();x();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "0.75");
+		assertEquals(c.compare(new Formatter(), new Output()), "0.75");
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int ha () { }";
 		String tar = "int main () { y();z();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()),
+		assertEquals(c.compare(new Formatter(), new Output()),
 				"0.3333333333333333");
 	}
 
@@ -46,7 +46,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { y();z();}";
 		String tar = "int ha () { }";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "1.0");
+		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { y();z(); }";
 		String tar = "int main () { }";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "1.0");
+		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
 	}
 
 	@Test
@@ -62,6 +62,6 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { y();z(); }";
 		String tar = "int main () { a();b();c();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new PercentageOutput()), "0.75");
+		assertEquals(c.compare(new Formatter(), new Output()), "0.75");
 	}
 }
