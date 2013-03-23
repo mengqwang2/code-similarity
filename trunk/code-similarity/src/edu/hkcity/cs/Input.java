@@ -51,10 +51,11 @@ public class Input {
 			
 			originalFile = new String(oriBuf);
 			targetFile = new String(tarBuf);
-			// Notice compare() has been changed
+			
 			new LineByLineComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
 			new FuncByFuncComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
 			new RegexComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
+			new CosineSimilarity(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
