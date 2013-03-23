@@ -180,14 +180,16 @@ public class Utility {
 	 * @return the string
 	 */
 	public static String replace(String str, String tar) {
-		str = str.replaceAll(" ", "");
-		tar = tar.replaceAll(" ", "");
+		str = str.replaceAll("[\n]", "");
+		tar = tar.replaceAll("[\n]", "");
 
 		if (str.length() > tar.length()) {
 			String tmp = tar;
 			tar = str;
 			str = tmp;
 		}
+		//System.out.print("Target func: "+tar+"\n");
+		//System.out.print("Origianl func:"+str+"\n");
 
 		// String to be scanned to find the pattern.
 		String pattern = "(\\p{Punct})";
@@ -239,20 +241,22 @@ public class Utility {
 		var_m.appendTail(var_sb);
 
 		String re_pattern = var_sb.toString();
-		//System.out.print(re_pattern + "\n");
+		
 
 		// Create a Pattern object
 		Pattern re_r = Pattern.compile(re_pattern);
 		Matcher re_m = re_r.matcher(tar);
-		re_m.find();
-		int numMatches = re_m.groupCount();
-		for (int i = 0; i != numMatches; ++i) {
-			String toBeReplaced = "\\b" + re_m.group(i + 1) + "\\b";
-			String middlewareReplacement = "0R" + var.get(i);
-			//System.out.print(toBeReplaced + "\n");
-			tar = tar.replaceAll(toBeReplaced, middlewareReplacement);
+		if(re_m.matches()) {
+			//re_m.find();
+			int numMatches = re_m.groupCount();
+			// debug i from 0 to 1
+			for (int i = 0; i != numMatches; ++i) {
+				String toBeReplaced = "\\b" + re_m.group(i+1) + "\\b";
+				String middlewareReplacement = "0R" + var.get(i);				
+				tar = tar.replaceAll(toBeReplaced, middlewareReplacement);
+			}
+			tar = tar.replaceAll("\\b0R", "");
 		}
-		tar = tar.replaceAll("\\b0R", "");
 		return tar;
 	}
 
