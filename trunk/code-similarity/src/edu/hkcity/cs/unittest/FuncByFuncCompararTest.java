@@ -37,7 +37,7 @@ public class FuncByFuncCompararTest {
 		String tar = "int main () { y();z();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new Output()),
-				"0.3333333333333333");
+				"0.0");
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { y();z();}";
 		String tar = "int ha () { }";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
+		assertEquals(c.compare(new Formatter(), new Output()), "0.0");
 	}
 
 	@Test
@@ -57,11 +57,4 @@ public class FuncByFuncCompararTest {
 		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
 	}
 
-	@Test
-	public void testCompare_6() {
-		String ori = "int main () { y();z(); }";
-		String tar = "int main () { a();b();c();}";
-		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.75");
-	}
 }

@@ -123,4 +123,31 @@ public class UtilityTest {
 		assertEquals(result,
 				"foo(bar){for(i=0;i!=10;++i){i+=10;b=i+3;c+=i;i=2;i=3;i=4;}}");
 	}
+	
+	@Test
+	public void testReplace3() {
+		String org = "bar(foo){for(a=0;a!=10;++a){a+=10;b=a+3;c+=a;a=2;a=3;a=4;}}";
+		String tar = "bar(foo){for(i=0;i!=10;++i){i+=10;b=i+3;c+=i;i=2;i=3;i=4;}}";
+		String result = Utility.replace(org, tar);
+		assertEquals(result,
+				"bar(foo){for(a=0;a!=10;++a){a+=10;b=a+3;c+=a;a=2;a=3;a=4;}}");
+	}
+	
+	@Test
+	public void testReplace4() {
+		String org = "int foo(int i=0, int j=1) {printf(\"Hello World\n\");return i+j;}";
+		String tar = "int bar(int a=0, int b=1) {printf(\"Sorry World\n\");}";
+		String result = Utility.replace(org, tar);
+		assertEquals(result,
+				"int bar(int a=0, int b=1) {printf(\"Sorry World\");return a+b;}");
+	}
+	
+	@Test
+	public void testReplace5() {
+		String org = "void procs_create_msg(char* who, int pid, int ppid, time_t timer) {printf(\"[%s] %s (%d) created. Its parent is %d.\");who=null}";
+		String tar = "void msg(char* w, int id, int pid, time_t time) {printf(\"[%s] %s (%d) created. Its parent is %d.\");}";
+		String result = Utility.replace(org, tar);
+		assertEquals(result,
+				"void msg(char* w, int id, int pid, time_t time) {printf(\"[%s] %s (%d) created. Its parent is %d.\");w=null}");
+	}
 }
