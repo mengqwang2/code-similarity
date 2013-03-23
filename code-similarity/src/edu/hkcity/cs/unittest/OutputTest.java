@@ -23,7 +23,7 @@ public class OutputTest {
 
 	@After
 	public void tearDown() {
-		System.setOut(null);
+		//System.setOut(null);
 		po = null;
 	}
 
