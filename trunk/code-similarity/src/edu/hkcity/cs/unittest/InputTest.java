@@ -74,24 +74,5 @@ public class InputTest {
 		}
 	}
 
-	@Test
-	public void testInput_3() {
-		try {
-			FileWriter ori_fw = new FileWriter(ori_f, false);
-			FileWriter tar_fw = new FileWriter(tar_f, false);
 
-			String inStr = "";
-			ori_fw.write(inStr);
-			ori_fw.close();
-			tar_fw.write(inStr);
-			tar_fw.close();
-
-			Input input = new Input("ori.txt", "tar.txt");
-			input.getInput();
-			assertEquals(inStr, input.getOriginalFile());
-			assertEquals(inStr, input.getTargetFile());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
