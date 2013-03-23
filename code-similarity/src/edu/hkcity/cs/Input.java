@@ -55,7 +55,7 @@ public class Input {
 			new LineByLineComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
 			new FuncByFuncComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
 			new RegexComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
-			new CosineSimilarity(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
+			new CosSimComparar(originalFile, targetFile).compare(new Formatter(), new PercentageOutput());
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
