@@ -36,10 +36,8 @@ public class FuncByFuncComparar extends Comparar {
 	 * edu.hkcity.cs.Output)
 	 */
 	public String compare(Formatter fmt, Output output) {
-		// String target = fmt.format(getTar());
-		// String original = fmt.format(getOri());
-		String target = getTar();
-		String original = getOri();
+		String target = fmt.format(getTar());
+		String original = fmt.format(getOri());
 		ArrayList<String> targetFuncList = Utility.splitFunction(target);
 		ArrayList<String> originalFuncList = Utility.splitFunction(original);
 
