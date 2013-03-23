@@ -88,13 +88,13 @@ public class Input {
 			targetFile = new String(tarBuf);
 
 			new LineByLineComparar(originalFile, targetFile).compare(
-					new Formatter(), new PercentageOutput());
+					new Formatter(), new Output());
 			new FuncByFuncComparar(originalFile, targetFile).compare(
-					new Formatter(), new PercentageOutput());
+					new Formatter(), new Output());
 			new RegexComparar(originalFile, targetFile).compare(
-					new Formatter(), new PercentageOutput());
+					new Formatter(), new Output());
 			new CosSimComparar(originalFile, targetFile).compare(
-					new Formatter(), new PercentageOutput());
+					new Formatter(), new Output());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

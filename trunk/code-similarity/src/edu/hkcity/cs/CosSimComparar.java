@@ -61,7 +61,7 @@ public class CosSimComparar extends Comparar {
 	   output:
 	   cosine similarity of input strings;
 	 */
-	public static double PubCosSimliar(String str1, String str2) {
+	public double PubCosSimliar(String str1, String str2) {
 		return CosSimliar(str1, str2);
 	}
 
@@ -72,7 +72,7 @@ public class CosSimComparar extends Comparar {
 	 * @param str2 the str2
 	 * @return the double
 	 */
-	private static double CosSimliar(String str1, String str2) {
+	private double CosSimliar(String str1, String str2) {
 		Map<String, int[]> vectorSpace = new HashMap<String, int[]>();
 		int[] itemCountArray = null;
 

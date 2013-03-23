@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.hkcity.cs.Formatter;
-import edu.hkcity.cs.PercentageOutput;
+import edu.hkcity.cs.Output;
 import edu.hkcity.cs.RegexComparar;
 
 public class RegexCompararTest {
@@ -61,7 +61,7 @@ public class RegexCompararTest {
 		String code1 = "The      quick brown fox jumps over the lazy dog.";
 		String code2 = "You can see actually these two      are not code so they are treated the same.";
 		RegexComparar comp = new RegexComparar(code1, code2);
-		String result = comp.compare(new Formatter(), new PercentageOutput());
+		String result = comp.compare(new Formatter(), new Output());
 		assertEquals(result, "1.0");
 	}
 
@@ -70,7 +70,7 @@ public class RegexCompararTest {
 		String code1 = "E\n!=\tm*(c^2)\t\t\t";
 		String code2 = "P~=PI*(r^2)\n\n\n";
 		RegexComparar comp = new RegexComparar(code1, code2);
-		String result = comp.compare(new Formatter(), new PercentageOutput());
+		String result = comp.compare(new Formatter(), new Output());
 		assertEquals(result, "0.875");
 	}
 
@@ -79,7 +79,7 @@ public class RegexCompararTest {
 		String code1 = "E=m*(c^2)\n is the most famous formula and frankly I am kidding you";
 		String code2 = "Omg=omg*(omg^2)            are you kidding me that they are the same yes sir";
 		RegexComparar comp = new RegexComparar(code1, code2);
-		String result = comp.compare(new Formatter(), new PercentageOutput());
+		String result = comp.compare(new Formatter(), new Output());
 		assertEquals(result, "1.0");
 	}
 }

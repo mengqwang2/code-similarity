@@ -3,7 +3,7 @@ package edu.hkcity.cs;
 /**
  * The Class Output.
  */
-public abstract class Output {
+public class Output {
 	
 	/**
 	 * Instantiates a new output.
@@ -20,5 +20,6 @@ public abstract class Output {
 	 *            the ratio
 	 */
 	public void print(String name, double ratio) {
+		System.out.printf("%s : %.2f%%\n", name, ratio * 100);
 	};
 }
