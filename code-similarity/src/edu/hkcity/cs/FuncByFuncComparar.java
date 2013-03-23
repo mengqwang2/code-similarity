@@ -12,6 +12,7 @@ public class FuncByFuncComparar extends Comparar {
 	 */
 	public FuncByFuncComparar() {
 		super();
+		info = "Function by Function Comparar";
 	}
 
 	/**

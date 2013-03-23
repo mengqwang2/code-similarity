@@ -9,6 +9,7 @@ public abstract class Comparar {
 	 * Instantiates a new comparar.
 	 */
 	public Comparar() {
+		info = "Abstract Comparar";
 	}
 
 	/**

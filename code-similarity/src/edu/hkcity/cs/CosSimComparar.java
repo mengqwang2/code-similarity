@@ -14,6 +14,7 @@ public class CosSimComparar extends Comparar {
 	 */
 	public CosSimComparar() {
 		super();
+		info = "CosineSimilarity Comparar";
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class CosSimComparar extends Comparar {
 		original = original.replaceAll("\n", " ");
 		double res = CosSimliar(target, original);
 		String strRes = Double.toString(res);
-		output.print("Cosine Similarity", res);
+		output.print(info, res);
 		return strRes;
 	}
 
