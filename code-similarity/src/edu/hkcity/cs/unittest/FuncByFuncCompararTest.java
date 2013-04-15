@@ -56,5 +56,4 @@ public class FuncByFuncCompararTest {
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
 	}
-
 }

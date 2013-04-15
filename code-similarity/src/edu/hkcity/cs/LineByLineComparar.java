@@ -9,14 +9,6 @@ public class LineByLineComparar extends Comparar {
 	// Constructors
 	/**
 	 * Instantiates a new line by line comparar.
-	 */
-	public LineByLineComparar() {
-		super();
-		info = "LineByLine Comparar";
-	}
-
-	/**
-	 * Instantiates a new line by line comparar.
 	 * 
 	 * @param tar
 	 *            the tar

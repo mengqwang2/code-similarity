@@ -2,6 +2,8 @@ package edu.hkcity.cs.unittest;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -141,7 +143,7 @@ public class UtilityTest {
 		assertEquals(result,
 				"int bar(int a=0, int b=1) {printf(\"Sorry World\");return a+b;}");
 	}
-	
+
 	@Test
 	public void testReplace5() {
 		String org = "void procs_create_msg(char* who, int pid, int ppid, time_t timer) {printf(\"[%s] %s (%d) created. Its parent is %d.\");who=null}";
@@ -149,5 +151,14 @@ public class UtilityTest {
 		String result = Utility.replace(org, tar);
 		assertEquals(result,
 				"void msg(char* w, int id, int pid, time_t time) {printf(\"[%s] %s (%d) created. Its parent is %d.\");w=null}");
+	}
+	@Test
+	public void testSplitFunction() {
+		String program = "int main () { a(); }\nint a () { b(); }\nint b () { c(); }";
+		ArrayList<String> list=Utility.splitFunction(program);
+		for(int n=0;n<list.size();n++){
+			System.out.println("LL--"+list.get(n));
+		}
+		assertEquals(1,1);
 	}
 }

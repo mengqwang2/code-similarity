@@ -9,14 +9,6 @@ public class FuncByFuncComparar extends Comparar {
 	// Constructor
 	/**
 	 * Instantiates a new func by func comparar.
-	 */
-	public FuncByFuncComparar() {
-		super();
-		info = "Function by Function Comparar";
-	}
-
-	/**
-	 * Instantiates a new func by func comparar.
 	 * 
 	 * @param tar
 	 *            the tar

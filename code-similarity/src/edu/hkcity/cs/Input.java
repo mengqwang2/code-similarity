@@ -98,9 +98,7 @@ public class Input {
 			new CosSimComparar(originalFile, targetFile).compare(
 					new Formatter(), new Output());
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -115,31 +113,11 @@ public class Input {
 	}
 
 	/**
-	 * Sets the original file.
-	 * 
-	 * @param originalFile
-	 *            the new original file
-	 */
-	public void setOriginalFile(String originalFile) {
-		this.originalFile = originalFile;
-	}
-
-	/**
 	 * Gets the target file.
 	 * 
 	 * @return the target file
 	 */
 	public String getTargetFile() {
 		return targetFile;
-	}
-
-	/**
-	 * Sets the target file.
-	 * 
-	 * @param targetFile
-	 *            the new target file
-	 */
-	public void setTargetFile(String targetFile) {
-		this.targetFile = targetFile;
 	}
 }
