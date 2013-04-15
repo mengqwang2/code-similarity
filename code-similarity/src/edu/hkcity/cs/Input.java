@@ -7,6 +7,7 @@ import java.util.Scanner;
  * The Class Input.
  */
 public class Input {
+	private Scanner scanner = null;
 	
 	/** The original file name. */
 	private String originalFileName;
@@ -49,7 +50,8 @@ public class Input {
 	 * @return the filename
 	 */
 	private String getFilename(String msg) {
-		Scanner scanner = new Scanner(System.in);
+		if (scanner==null)
+			scanner = new Scanner(System.in);
 		String fileName = null;
 		while (fileName == null) {
 			System.out.print(msg);
