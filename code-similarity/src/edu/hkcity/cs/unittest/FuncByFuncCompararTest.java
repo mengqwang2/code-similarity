@@ -56,4 +56,20 @@ public class FuncByFuncCompararTest {
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
 	}
+	
+	@Test
+	public void testCompare_6() {
+		String ori = "int a(){a1();}int b(){b1();}int c(){c1();}int d(){d1();}";
+		String tar = "int a(){a1();}int b(){b1();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(new Formatter(), new Output()), "1.0");
+	}
+	
+	@Test
+	public void testCompare_7() {
+		String ori = "int a(){a1();}int b(){b1();}";
+		String tar = "int a(){a1();}int b(){b1();}int c(){c1();}int d(){d1();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals(c.compare(new Formatter(), new Output()), "0.5");
+	}
 }
