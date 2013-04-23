@@ -60,16 +60,13 @@ public class RegexComparar extends Comparar {
         Arrays.sort(tarVars);
         Arrays.sort(oriVars);
 
-        int tarLen = tarVars.length;
-        int oriLen = oriVars.length;
+        String[] sortedTar = new String[tarVars.length];
+        String[] sortedOri = new String[oriVars.length];
 
-        String[] sortedTar = new String[tarLen];
-        String[] sortedOri = new String[oriLen];
-
-        for (int i = 0; i < tarLen; ++i)
-            sortedTar[i] = tarVars[tarLen - 1 - i];
-        for (int i = 0; i < oriLen; ++i)
-            sortedOri[i] = oriVars[oriLen - 1 - i];
+        for (int i = 0; i < tarVars.length; ++i)
+            sortedTar[i] = tarVars[tarVars.length - 1 - i];
+        for (int i = 0; i < oriVars.length; ++i)
+            sortedOri[i] = oriVars[oriVars.length - 1 - i];
 
         String[] regedTar = tar.replaceAll("\\s|;|" + Utility.join(sortedTar, "|"), "").split("");
         String[] regedOri = ori.replaceAll("\\s|;|" + Utility.join(sortedOri, "|"), "").split("");

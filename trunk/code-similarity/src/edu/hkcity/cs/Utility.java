@@ -36,10 +36,9 @@ public class Utility {
      */
     public static String join(String[] arr, String delimiter) {
         String result = "";
-        int length = arr.length;
-        for (int i = 0; i < length - 1; ++i)
+        for (int i = 0; i < arr.length - 1; ++i)
             result += arr[i] + delimiter;
-        result += arr[length - 1];
+        result += arr[arr.length - 1];
         return result;
     }
 
@@ -66,9 +65,8 @@ public class Utility {
      */
     public static String[] removeDuplicate(String[] arr) {
         ArrayList<String> result = new ArrayList<String>();
-        int length = arr.length;
 
-        for (int i = 0; i < length; ++i) {
+        for (int i = 0; i < arr.length; ++i) {
             String s = arr[i];
             if (!result.contains(s))
                 result.add(s);
@@ -88,12 +86,12 @@ public class Utility {
     public static String[] extractVarNames(String source) {
         ArrayList<String> list = new ArrayList<String>();
         String[] frag = source.split("\\s");
-        int fragLeng = frag.length;
-        String[][] vars = new String[fragLeng][];
-        for (int i = 0; i < fragLeng; ++i) {
+
+        String[][] vars = new String[frag.length][];
+        for (int i = 0; i < frag.length; ++i) {
             vars[i] = frag[i].split("(\'.*\')|(\".*\")|(\\W)");
-            int length = vars[i].length;
-            for (int j = 0; j < length; ++j)
+
+            for (int j = 0; j < vars[i].length; ++j)
                 if (isVar(vars[i][j]))
                     list.add(vars[i][j]);
         }
@@ -111,23 +109,21 @@ public class Utility {
      * @return the double
      */
     public static double lcs(String[] token1, String[] token2) {
-        int n = token1.length;
-        int m = token2.length;
 
-        int[][] C = new int[n + 1][m + 1];
+        int[][] C = new int[token1.length + 1][token2.length + 1];
 
-        /* C[i][0] = 0 for 0<=i<=n */
-        for (int i = 0; i <= n; i++) {
+        /* C[i][0] = 0 for 0<=i<=token1.length */
+        for (int i = 0; i <= token1.length; i++) {
             C[i][0] = 0;
         }
 
-        /* C[0][j] = 0 for 0<=j<=m */
-        for (int j = 0; j <= m; j++) {
+        /* C[0][j] = 0 for 0<=j<=token2.length */
+        for (int j = 0; j <= token2.length; j++) {
             C[0][j] = 0;
         }
         /* dynamic programming */
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
+        for (int i = 1; i <= token1.length; i++) {
+            for (int j = 1; j <= token2.length; j++) {
 
                 if (token1[i - 1].equals(token2[j - 1])) {
                     C[i][j] = C[i - 1][j - 1] + 1;
@@ -139,7 +135,7 @@ public class Utility {
             }
         }
 
-        return C[n][m] * 1.0 / n;
+        return C[token1.length][token2.length] * 1.0 / token1.length;
     }
 
 
@@ -170,7 +166,8 @@ public class Utility {
 
     /*
      * buildRegexpPattern
-     *     1. escape all the punctuation in the string to make it a regular punctuation in the regular expression
+     *	1. escape all the punctuation in the string to make it
+     *     a regular punctuation in the regular expression
      *  2. append anonymous symbols to punctuation ";" "{" and "}"
      * @param string
      *
