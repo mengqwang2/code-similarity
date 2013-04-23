@@ -79,7 +79,7 @@ public class Utility {
 
 
 	/**
-	 * Extract var names. Extract a list of variable names from a string based on predetermined keywords
+	 * Extract var names. Extract a list of var names from a string based on predetermined keywords
 	 * 
 	 * @param source
 	 *            the source
@@ -168,15 +168,86 @@ public class Utility {
 		return allMatches.toArray(new String[0]);
 	}
 
+	/*
+	 * buildRegexpPattern
+	 * 	1. escape all the punctuation in the string to make it a regular punctuation in the regular expression
+	 *  2. append anonymous symbols to punctuation ";" "{" and "}"  
+	 * @param string
+	 * 
+	 * @return regexp_pattern
+	 * 
+	 */
+	private static String buildRegexpPattern(String str) {
+		// String to be scanned to find the pattern.
+		String punct_pattern = "([\\p{Punct}&&[^_]])";
+		// Create a Pattern object
+		Pattern pattern = Pattern.compile(punct_pattern);
+
+		Matcher matcher = pattern.matcher(str);
+
+		StringBuffer sb = new StringBuffer();
+		
+		while (true == matcher.find()){
+			String escape_punct = "\\\\" + matcher.group();
+			if (matcher.group().equals(";") || matcher.group().equals("{") || matcher.group().equals("}")) {
+				// append anonymous symbols
+				escape_punct = new String(escape_punct+"(?:.*?)?");
+			}
+			matcher.appendReplacement(sb, escape_punct);
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
+	}
+	
+	/**
+	 * extract var and build var-based Regexp
+	 *  1. build var-based regular expression.  
+	 *  2. extract the var and store in the Vector<String>
+	 * @param str
+	 *
+	 * @param Vector<String>
+	 *
+	 * @return var-based regexp
+	 */
+	private static String buildvarBasedRegexp(final String str, Vector<String> extractedvars) {
+		// String to be scanned to find the pattern.
+
+		String varPatternStr = "([\\w_]+)";
+
+		// Create a Pattern object
+		Pattern varPattern = Pattern.compile(varPatternStr);
+		
+		Matcher varMatcher = varPattern.matcher(str);
+
+		StringBuffer varSb = new StringBuffer();
+
+		while (varMatcher.find()) {
+			if (isVar(varMatcher.group())) {
+				int index = extractedvars.indexOf(varMatcher.group());
+				if (index == -1) {
+					extractedvars.add(varMatcher.group());
+					varMatcher.appendReplacement(varSb, "(\\\\w*?)");
+				} else {
+					varMatcher.appendReplacement(varSb,
+							"\\\\" + Integer.toString(index + 1));
+				}
+			}
+		}
+		varMatcher.appendTail(varSb);
+
+		return varSb.toString();
+	}
 
 	/**
 	 * Replace.
-	 * 
+	 *
 	 * @param str
 	 *            the str
 	 * @param tar
 	 *            the tar
 	 * @return the string
+	 *
+	 * also see the buildRegexpPattern() function
 	 */
 	public static String replace(String str, String tar) {
 		str = str.replaceAll("[\n\\\\]", "");
@@ -188,66 +259,24 @@ public class Utility {
 			str = tmp;
 		}
 
-		// String to be scanned to find the pattern.
-		String pattern = "([\\p{Punct}&&[^_]])";
-		// Create a Pattern object
-		Pattern r = Pattern.compile(pattern);
+		// build regular expression
+		str = buildRegexpPattern(str);
 
-		Matcher m = r.matcher(str);
-
-		StringBuffer sb = new StringBuffer();
-		
-		while (m.find()) {
-			String escape_punct = "\\\\" + m.group();
-			if (m.group().equals(";") || m.group().equals("{")) {
-				escape_punct = new String(escape_punct+"(?:.*?)?");
-			}
-			m.appendReplacement(sb, escape_punct);
-		}
-		m.appendTail(sb);
-		str = sb.toString();
-
-		// String to be scanned to find the pattern.
-
-		String var_pattern = "([\\w_]+)";
-
-		// Create a Pattern object
-		Pattern var_r = Pattern.compile(var_pattern);
-
-		// Now create matcher object.
+		// Vector to store the extracted var
 		Vector<String> var = new Vector<String>();
 
-		Matcher var_m = var_r.matcher(str);
-
-		StringBuffer var_sb = new StringBuffer();
-
-		while (var_m.find()) {
-
-			if (isVar(var_m.group())) {
-				int index = var.indexOf(var_m.group());
-				if (index == -1) {
-					var.add(var_m.group());
-					var_m.appendReplacement(var_sb, "(\\\\w*?)");
-				} else {
-					var_m.appendReplacement(var_sb,
-							"\\\\" + Integer.toString(index + 1));
-				}
-			}
-		}
-		var_m.appendTail(var_sb);
-
-		String re_pattern = var_sb.toString();
+		// build var based regular expression
+		String varPatternStr = buildvarBasedRegexp(str, var);
 		
-
 		// Create a Pattern object
-		Pattern re_r = Pattern.compile(re_pattern);
-		Matcher re_m = re_r.matcher(tar);
-		if(re_m.matches()) {
-			//re_m.find();
-			int numMatches = re_m.groupCount();
+		Pattern varPattern = Pattern.compile(varPatternStr);
+		Matcher varMatcher = varPattern.matcher(tar);
+		if(varMatcher.matches()) {
+			//varMatcher.find();
+			int numMatches = varMatcher.groupCount();
 			// debug i from 0 to 1
 			for (int i = 0; i != numMatches; ++i) {
-				String toBeReplaced = "\\b" + re_m.group(i+1) + "\\b";
+				String toBeReplaced = "\\b" + varMatcher.group(i+1) + "\\b";
 				String middlewareReplacement = "0R" + var.get(i);				
 				tar = tar.replaceAll(toBeReplaced, middlewareReplacement);
 			}
