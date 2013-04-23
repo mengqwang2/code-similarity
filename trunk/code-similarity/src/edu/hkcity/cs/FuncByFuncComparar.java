@@ -39,12 +39,12 @@ public class FuncByFuncComparar extends Comparar {
         int lnt[] = new int[sims.length];
         int iSims = 0, jCount = 0;
 
-        for (int i = 0; i < targetFuncList.size(); i++) {
-            double maxSim = -1;
-            int jMax = -1;
-            for (int j = 0; j < originalFuncList.size(); j++) {
-                if (oriFuncPaired[j])
-                    continue;
+		for (int i = 0; i < targetFuncList.size(); i++) {
+			double maxSim = 0;
+			int jMax = -1;
+			for (int j = 0; j < originalFuncList.size(); j++) {
+				if (oriFuncPaired[j])
+					continue;
 
                 String tarFunc = targetFuncList.get(i);
                 String oriFunc = originalFuncList.get(j);
@@ -57,7 +57,7 @@ public class FuncByFuncComparar extends Comparar {
                 String[] tarFunToken = Utility.getTok(tarFunc);
                 String[] oriFunToken = Utility.getTok(oriFunc);
 
-                double sim = Utility.lcs(tarFunToken, oriFunToken);
+				double sim = Utility.lcs(oriFunToken,tarFunToken);
 
                 if (sim > maxSim) {
                     jMax = j;
@@ -89,8 +89,8 @@ public class FuncByFuncComparar extends Comparar {
 
         output.print(info, result);
 
-        return Double.toString(result);
-    }
+		return Double.toString(Math.floor(result*100)/100);
+	}
 
     /**
      * Cal similarity.

@@ -75,59 +75,68 @@ public class Formatter {
                 "\n");
     }
 
-    public String getFormattedData() {
-        return formattedString;
-    }
+	/**
+	 * Format variable declaration.
+	 * 
+	 * @param str
+	 *            the str
+	 * @return the string
+	 */
+	public String formatVariableDeclaration(String str) {
+		ArrayList<String> funcList = Utility.splitFunction(str);
+		for (int n = 0; n < funcList.size(); n++) {
+			Pattern pattern = Pattern
+					.compile("[a-zA-Z_][\\w_:<>]*[*]* [*]*[A-Za-z_][\\w_]*.*?;");
+			Matcher matcher = pattern.matcher(funcList.get(n));
+			int lastEnd = 0;
+			StringBuffer resStr = new StringBuffer();
+			while (matcher.find()) {
+				int start = matcher.start();
+				int end = matcher.end();
+				resStr.append(funcList.get(n).substring(lastEnd, start));
+				String mstr = funcList.get(n).substring(start, end);
+				StringTokenizer st = new StringTokenizer(mstr, ",");
+				StringBuffer tmpStr = new StringBuffer();
+				while (st.hasMoreTokens()) {
+					String s = st.nextToken();
+					String sdstr = tmpStr.append(s).toString();
+					boolean hasPBuck = hasParallelBucket(sdstr);
+					boolean hasAssSym = hasAssignSymbol(sdstr);
+					if (hasPBuck && hasAssSym) {
+						resStr.append(getRefinedStatement(sdstr));
+						tmpStr = new StringBuffer();
+					} else if (!hasAssSym)
+						tmpStr = new StringBuffer();
+					else
+						tmpStr.append(',');
+				}
+				lastEnd = end;
+			}
+			if (resStr.charAt(resStr.length() - 1) == ',')
+				resStr.replace(resStr.length() - 1, resStr.length(), ";");
+			resStr.append(funcList.get(n).substring(lastEnd));
+			funcList.set(n, resStr.toString());
+		}
+		StringBuffer res = new StringBuffer();
+		for (int n = 0; n < funcList.size(); n++) {
+			res.append(funcList.get(n));
+		}
+		return res.toString();
+	}
 
-    /**
-     * Format variable declaration.
-     *
-     * @param str
-     *            the str
-     * @return the string
-     */
-    public String formatVariableDeclaration(String str) {
-        ArrayList<String> funcList = Utility.splitFunction(str);
-        for (int n = 0; n < funcList.size(); n++) {
-            Pattern pattern = Pattern
-                    .compile("[a-zA-Z_][\\w_:<>]*[*]* [*]*[A-Za-z_][\\w_]*.*?;");
-            Matcher matcher = pattern.matcher(funcList.get(n));
-            int lastEnd = 0;
-            StringBuffer resStr = new StringBuffer();
-            while (matcher.find()) {
-                int start = matcher.start();
-                int end = matcher.end();
-                resStr.append(funcList.get(n).substring(lastEnd, start));
-                String mstr = funcList.get(n).substring(start, end);
-                StringTokenizer st = new StringTokenizer(mstr, ",");
-                StringBuffer tmpStr = new StringBuffer();
-                while (st.hasMoreTokens()) {
-                    String s = st.nextToken();
-                    String sdstr = tmpStr.append(s).toString();
-                    boolean hasPBuck = hasParallelBucket(sdstr);
-                    boolean hasAssSym = hasAssignSymbol(sdstr);
-                    if (hasPBuck && hasAssSym) {
-                        resStr.append(getRefinedStatement(sdstr));
-                        tmpStr = new StringBuffer();
-                    } else if (!hasAssSym)
-                        tmpStr = new StringBuffer();
-                    else if (st.hasMoreTokens())
-                        tmpStr.append(',');
-                }
-                lastEnd = end;
-            }
-            if (resStr.charAt(resStr.length() - 1) == ',')
-                resStr.replace(resStr.length() - 1, resStr.length(), ";");
-            resStr.append(funcList.get(n).substring(lastEnd));
-            funcList.set(n, resStr.toString());
-        }
-        StringBuffer res = new StringBuffer();
-        for (int n = 0; n < funcList.size(); n++) {
-            res.append(funcList.get(n));
-        }
-        return res.toString();
-    }
-
+	/**
+	 * Checks for assign symbol.
+	 * 
+	 * @param str
+	 *            the str
+	 * @return true, if successful
+	 */
+	private boolean hasAssignSymbol(String str) {
+		int i = str.indexOf('=');
+		if (i == -1 || i == 0 || i == str.length() - 1 || (i > 0 && str.charAt(i - 1) == '!') || (i < str.length() - 1 && str.charAt(i + 1) == '='))
+			return false;
+		return true;
+	}
     /**
      * Checks for parallel bucket.
      *
@@ -148,24 +157,6 @@ public class Formatter {
             i = str.indexOf(')', ++i);
         }
         return op == cl;
-    }
-
-    /**
-     * Checks for assign symbol.
-     *
-     * @param str
-     *            the str
-     * @return true, if successful
-     */
-    private boolean hasAssignSymbol(String str) {
-        int i = str.indexOf('=');
-        if (i == -1 || i == 0 || i == str.length() - 1)
-            return false;
-        if (i > 0 && str.charAt(i - 1) == '!')
-            return false;
-        if (i < str.length() - 1 && str.charAt(i + 1) == '=')
-            return false;
-        return true;
     }
 
     /**

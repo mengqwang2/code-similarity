@@ -1,15 +1,17 @@
 package edu.hkcity.cs;
 
-public class Main {
+import java.io.IOException;
 
-    /**
-     * The main method.
-     *
-     * @param args
-     *            the arguments
-     */
-    public static void main(String[] args) {
-        Input in = new Input();
-        in.getInput();
-    }
+public class Main {	
+	/**
+	 * The main method.
+	 * 
+	 * @param args
+	 *            the arguments
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		Input in = new Input();
+		in.getInput();
+	}
 }
