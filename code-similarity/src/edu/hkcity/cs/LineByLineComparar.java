@@ -31,20 +31,17 @@ public class LineByLineComparar extends Comparar {
         String[] tarStr = target.split("\n");
         String[] oriStr = original.split("\n");
 
-        int tarLength = tarStr.length;
-        int oriLength = oriStr.length;
-
         double count = 0;
 
-        for (int i = 0; i != tarLength; ++i) {
-            if (i >= oriLength)
+        for (int i = 0; i != tarStr.length; ++i) {
+            if (i >= oriStr.length)
                 break;
             if (tarStr[i].equals(oriStr[i])) {
                 ++count;
             }
         }
 
-        Double result = count / tarLength;
+        Double result = count / tarStr.length;
 
         output.print(info, result);
 
