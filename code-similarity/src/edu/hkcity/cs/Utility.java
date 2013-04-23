@@ -234,7 +234,6 @@ public class Utility {
             }
         }
         varMatcher.appendTail(varSb);
-
         return varSb.toString();
     }
 
@@ -293,23 +292,23 @@ public class Utility {
      *            the program
      * @return the array list
      */
-    public static ArrayList<String> splitFunction(String program) {
-        ArrayList<String> funcList = new ArrayList<String>();
-        Pattern pattern = Pattern.compile(
-                "[\\w\\*]* [\\w]*\\((.*)\\)[ \\r\\n]*\\{", Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(program);
-        int start = 0;
-        int nextStart = 0;
-        while (matcher.find()) {
-            start = nextStart;
-            nextStart = matcher.start();
-            if (start != 0) {
-                funcList.add(program.substring(start, nextStart).replaceAll(
-                        "[\\r\\n\\s]+$", ""));
-            }
-        }
-        funcList.add(program.substring(nextStart, program.length()).replaceAll(
-                "[\\r\\n\\s]+$", ""));
-        return funcList;
-    }
+	public static ArrayList<String> splitFunction(String program) {
+		ArrayList<String> funcList = new ArrayList<String>();
+		Pattern pattern = Pattern.compile(
+				"[\\w\\*]* [\\w\\s]*\\((.*?)\\)[ \\r\\n]*\\{", Pattern.MULTILINE);
+		Matcher matcher = pattern.matcher(program);
+		int start = 0;
+		int nextStart = 0;
+		while (matcher.find()) {
+			start = nextStart;
+			nextStart = matcher.start();
+			if (nextStart != 0) {
+				funcList.add(program.substring(start, nextStart).replaceAll(
+						"[\\r\\n\\s]+$", ""));
+			}
+		}
+		funcList.add(program.substring(nextStart, program.length()).replaceAll(
+				"[\\r\\n\\s]+$", ""));
+		return funcList;
+	}
 }

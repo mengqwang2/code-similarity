@@ -28,7 +28,6 @@ public class Input {
         originalFileName = getFilename("Please enter original name:");
         targetFileName = getFilename("Please enter target name:");
     }
-
     /**
      * Instantiates a new input.
      *
@@ -41,7 +40,6 @@ public class Input {
         originalFileName = oriName;
         targetFileName = tarName;
     }
-
     /**
      * Gets the filename.
      *
@@ -65,7 +63,6 @@ public class Input {
         }
         return fileName;
     }
-
     /**
      * Gets the input.
      *
@@ -82,7 +79,7 @@ public class Input {
 
             oriStream.read(oriBuf);
             tarStream.read(tarBuf);
-
+			
             oriStream.close();
             tarStream.close();
 
