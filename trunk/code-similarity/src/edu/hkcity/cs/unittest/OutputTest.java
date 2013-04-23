@@ -12,36 +12,36 @@ import org.junit.Test;
 import edu.hkcity.cs.Output;
 
 public class OutputTest {
-	private final ByteArrayOutputStream output = new ByteArrayOutputStream();
-	private Output po;
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private Output po;
 
-	@Before
-	public void setUp() {
-		System.setOut(new PrintStream(output));
-		po = new Output();
-	}
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(output));
+        po = new Output();
+    }
 
-	@After
-	public void tearDown() {
-		//System.setOut(null);
-		po = null;
-	}
+    @After
+    public void tearDown() {
+        //System.setOut(null);
+        po = null;
+    }
 
-	@Test
-	public void testPrint1() {
-		po.print("name", 0.333333333);
-		assertEquals("name : 33.33%\n", output.toString());
-	}
+    @Test
+    public void testPrint1() {
+        po.print("name", 0.333333333);
+        assertEquals("name : 33.33%\n", output.toString());
+    }
 
-	@Test
-	public void testPrint2() {
-		po.print("ss", 1);
-		assertEquals("ss : 100.00%\n", output.toString());
-	}
+    @Test
+    public void testPrint2() {
+        po.print("ss", 1);
+        assertEquals("ss : 100.00%\n", output.toString());
+    }
 
-	@Test
-	public void testPrint3() {
-		po.print("formatter", 0.99);
-		assertEquals("formatter : 99.00%\n", output.toString());
-	}
+    @Test
+    public void testPrint3() {
+        po.print("formatter", 0.99);
+        assertEquals("formatter : 99.00%\n", output.toString());
+    }
 }
