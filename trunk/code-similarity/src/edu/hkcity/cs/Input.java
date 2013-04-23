@@ -67,37 +67,33 @@ public class Input {
      * Gets the input.
      *
      * @return the input
+     * @throws IOException 
      */
-    public void getInput() {
-        try {
-            File oriFile = new File(originalFileName);
-            File tarFile = new File(targetFileName);
-            InputStream oriStream = new FileInputStream(oriFile);
-            InputStream tarStream = new FileInputStream(tarFile);
-            byte[] oriBuf = new byte[(int) oriFile.length()];
-            byte[] tarBuf = new byte[(int) tarFile.length()];
+    public void getInput() throws IOException {
+        File oriFile = new File(originalFileName);
+        File tarFile = new File(targetFileName);
+        InputStream oriStream = new FileInputStream(oriFile);
+        InputStream tarStream = new FileInputStream(tarFile);
+        byte[] oriBuf = new byte[(int) oriFile.length()];
+        byte[] tarBuf = new byte[(int) tarFile.length()];
 
-            oriStream.read(oriBuf);
-            tarStream.read(tarBuf);
-			
-            oriStream.close();
-            tarStream.close();
+        oriStream.read(oriBuf);
+        tarStream.read(tarBuf);
+		
+        oriStream.close();
+        tarStream.close();
 
-            originalFile = new String(oriBuf);
-            targetFile = new String(tarBuf);
+        originalFile = new String(oriBuf);
+        targetFile = new String(tarBuf);
 
-            new LineByLineComparar(originalFile, targetFile).compare(
-                    new Formatter(), new Output());
-            new FuncByFuncComparar(originalFile, targetFile).compare(
-                    new Formatter(), new Output());
-            new RegexComparar(originalFile, targetFile).compare(
-                    new Formatter(), new Output());
-            new CosSimComparar(originalFile, targetFile).compare(
-                    new Formatter(), new Output());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new LineByLineComparar(originalFile, targetFile).compare(
+                new Formatter(), new Output());
+        new FuncByFuncComparar(originalFile, targetFile).compare(
+                new Formatter(), new Output());
+        new RegexComparar(originalFile, targetFile).compare(
+                new Formatter(), new Output());
+        new CosSimComparar(originalFile, targetFile).compare(
+                new Formatter(), new Output());
     }
 
     /**
