@@ -7,117 +7,117 @@ import java.util.Scanner;
  * The Class Input.
  */
 public class Input {
-	private Scanner scanner = null;
-	
-	/** The original file name. */
-	private String originalFileName;
-	
-	/** The target file name. */
-	private String targetFileName;
-	
-	/** The original file. */
-	private String originalFile;
-	
-	/** The target file. */
-	private String targetFile;
+    private Scanner scanner = null;
 
-	/**
-	 * Instantiates a new input.
-	 */
-	public Input() {
-		originalFileName = getFilename("Please enter original name:");
-		targetFileName = getFilename("Please enter target name:");
-	}
+    /** The original file name. */
+    private String originalFileName;
 
-	/**
-	 * Instantiates a new input.
-	 * 
-	 * @param oriName
-	 *            the ori name
-	 * @param tarName
-	 *            the tar name
-	 */
-	public Input(String oriName, String tarName) {
-		originalFileName = oriName;
-		targetFileName = tarName;
-	}
+    /** The target file name. */
+    private String targetFileName;
 
-	/**
-	 * Gets the filename.
-	 * 
-	 * @param msg
-	 *            the msg
-	 * @return the filename
-	 */
-	private String getFilename(String msg) {
-		if (scanner==null)
-			scanner = new Scanner(System.in);
-		String fileName = null;
-		while (fileName == null) {
-			System.out.print(msg);
-			fileName = scanner.next();
-			try {
-				new FileInputStream(fileName);
-			} catch (FileNotFoundException e) {
-				System.out.println("File Not Found:" + fileName);
-				fileName = null;
-			}
-		}
-		return fileName;
-	}
+    /** The original file. */
+    private String originalFile;
 
-	/**
-	 * Gets the input.
-	 * 
-	 * @return the input
-	 */
-	public void getInput() {
-		try {
-			File oriFile = new File(originalFileName);
-			File tarFile = new File(targetFileName);
-			InputStream oriStream = new FileInputStream(oriFile);
-			InputStream tarStream = new FileInputStream(tarFile);
-			byte[] oriBuf = new byte[(int) oriFile.length()];
-			byte[] tarBuf = new byte[(int) tarFile.length()];
+    /** The target file. */
+    private String targetFile;
 
-			oriStream.read(oriBuf);
-			tarStream.read(tarBuf);
+    /**
+     * Instantiates a new input.
+     */
+    public Input() {
+        originalFileName = getFilename("Please enter original name:");
+        targetFileName = getFilename("Please enter target name:");
+    }
 
-			oriStream.close();
-			tarStream.close();
+    /**
+     * Instantiates a new input.
+     *
+     * @param oriName
+     *            the ori name
+     * @param tarName
+     *            the tar name
+     */
+    public Input(String oriName, String tarName) {
+        originalFileName = oriName;
+        targetFileName = tarName;
+    }
 
-			originalFile = new String(oriBuf);
-			targetFile = new String(tarBuf);
+    /**
+     * Gets the filename.
+     *
+     * @param msg
+     *            the msg
+     * @return the filename
+     */
+    private String getFilename(String msg) {
+        if (scanner==null)
+            scanner = new Scanner(System.in);
+        String fileName = null;
+        while (fileName == null) {
+            System.out.print(msg);
+            fileName = scanner.next();
+            try {
+                new FileInputStream(fileName);
+            } catch (FileNotFoundException e) {
+                System.out.println("File Not Found:" + fileName);
+                fileName = null;
+            }
+        }
+        return fileName;
+    }
 
-			new LineByLineComparar(originalFile, targetFile).compare(
-					new Formatter(), new Output());
-			new FuncByFuncComparar(originalFile, targetFile).compare(
-					new Formatter(), new Output());
-			new RegexComparar(originalFile, targetFile).compare(
-					new Formatter(), new Output());
-			new CosSimComparar(originalFile, targetFile).compare(
-					new Formatter(), new Output());
+    /**
+     * Gets the input.
+     *
+     * @return the input
+     */
+    public void getInput() {
+        try {
+            File oriFile = new File(originalFileName);
+            File tarFile = new File(targetFileName);
+            InputStream oriStream = new FileInputStream(oriFile);
+            InputStream tarStream = new FileInputStream(tarFile);
+            byte[] oriBuf = new byte[(int) oriFile.length()];
+            byte[] tarBuf = new byte[(int) tarFile.length()];
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            oriStream.read(oriBuf);
+            tarStream.read(tarBuf);
 
-	/**
-	 * Gets the original file.
-	 * 
-	 * @return the original file
-	 */
-	public String getOriginalFile() {
-		return originalFile;
-	}
+            oriStream.close();
+            tarStream.close();
 
-	/**
-	 * Gets the target file.
-	 * 
-	 * @return the target file
-	 */
-	public String getTargetFile() {
-		return targetFile;
-	}
+            originalFile = new String(oriBuf);
+            targetFile = new String(tarBuf);
+
+            new LineByLineComparar(originalFile, targetFile).compare(
+                    new Formatter(), new Output());
+            new FuncByFuncComparar(originalFile, targetFile).compare(
+                    new Formatter(), new Output());
+            new RegexComparar(originalFile, targetFile).compare(
+                    new Formatter(), new Output());
+            new CosSimComparar(originalFile, targetFile).compare(
+                    new Formatter(), new Output());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets the original file.
+     *
+     * @return the original file
+     */
+    public String getOriginalFile() {
+        return originalFile;
+    }
+
+    /**
+     * Gets the target file.
+     *
+     * @return the target file
+     */
+    public String getTargetFile() {
+        return targetFile;
+    }
 }
