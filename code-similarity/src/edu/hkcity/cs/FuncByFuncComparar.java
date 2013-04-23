@@ -89,7 +89,7 @@ public class FuncByFuncComparar extends Comparar {
 
         output.print(info, result);
 
-		return Double.toString(Math.floor(result*100)/100);
+		return Double.toString(Math.floor(result*10000)/10000);
 	}
 
     /**

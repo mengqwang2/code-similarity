@@ -20,7 +20,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { x();}";
 		String tar = "int main () { y();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.66");
+		assertEquals(c.compare(new Formatter(), new Output()), "0.6666");
 	}
 
 	@Test
