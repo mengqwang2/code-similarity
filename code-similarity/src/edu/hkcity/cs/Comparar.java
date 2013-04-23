@@ -2,6 +2,7 @@ package edu.hkcity.cs;
 
 /**
  * The Class Comparar.
+ * @author HW
  */
 public abstract class Comparar {
 
@@ -15,12 +16,12 @@ public abstract class Comparar {
     /**
      * Instantiates a new comparar.
      *
-     * @param tarStr
+     * @param tar
      *            the tar
-     * @param oriStr
+     * @param ori
      *            the ori
      */
-    public Comparar(final String tarStr, final String oriStr) {
+    public Comparar(final String tar, final String ori) {
         this.setTar(tar);
         this.setOri(ori);
         info = "Abstract Comparar";
@@ -37,18 +38,38 @@ public abstract class Comparar {
      */
     public abstract String compare(Formatter fmt, Output output);
 
+    /**
+     * set target string
+     *
+     * @param tar
+     */
     private void setTar(String tar) {
         this.tar = tar;
     }
 
+    /**
+     * get the target string
+     *
+     * @return the string
+     */
     protected String getTar() {
         return tar;
     }
 
+    /**
+     * set original string
+     *
+     * @param ori
+     */
     private void setOri(String ori) {
         this.ori = ori;
     }
 
+    /**
+     * get original string
+     *
+     * @return the string
+     */
     protected String getOri() {
         return ori;
     }
