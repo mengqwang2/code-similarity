@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * The Class Utility.
  */
 public class Utility {
-	
+
 	/** The keywords. */
 	// Predetermined keywords, operators and values, extensible
 	protected static String[] keywords = {
@@ -27,7 +27,7 @@ public class Utility {
 
 	/**
 	 * Join. Join elements in an array to a string with a delimiter
-	 * 
+	 *
 	 * @param arr
 	 *            the arr
 	 * @param delimiter
@@ -46,7 +46,7 @@ public class Utility {
 
 	/**
 	 * Checks if is var. Decide whether a token is predetermined keywords
-	 * 
+	 *
 	 * @param token
 	 *            the token
 	 * @return true, if is var
@@ -56,10 +56,10 @@ public class Utility {
 				.matches(join(keywords, "|"), token));
 	}
 
-	
+
 	/**
 	 * Removes the duplicate. Remove duplicate element in an string array
-	 * 
+	 *
 	 * @param arr
 	 *            the arr
 	 * @return the string[]
@@ -80,7 +80,7 @@ public class Utility {
 
 	/**
 	 * Extract var names. Extract a list of var names from a string based on predetermined keywords
-	 * 
+	 *
 	 * @param source
 	 *            the source
 	 * @return the string[]
@@ -100,10 +100,10 @@ public class Utility {
 		return removeDuplicate(list.toArray(new String[list.size()]));
 	}
 
-	
+
 	/**
 	 * Lcs.
-	 * 
+	 *
 	 * @param token1
 	 *            the token1
 	 * @param token2
@@ -142,10 +142,10 @@ public class Utility {
 		return C[n][m] * 1.0 / n;
 	}
 
-	
+
 	/**
 	 * Gets the tok.
-	 * 
+	 *
 	 * @param str
 	 *            the str
 	 * @return the tok
@@ -171,37 +171,37 @@ public class Utility {
 	/*
 	 * buildRegexpPattern
 	 * 	1. escape all the punctuation in the string to make it a regular punctuation in the regular expression
-	 *  2. append anonymous symbols to punctuation ";" "{" and "}"  
+	 *  2. append anonymous symbols to punctuation ";" "{" and "}"
 	 * @param string
-	 * 
+	 *
 	 * @return regexp_pattern
-	 * 
+	 *
 	 */
 	private static String buildRegexpPattern(String str) {
 		// String to be scanned to find the pattern.
-		String punct_pattern = "([\\p{Punct}&&[^_]])";
+		String punctPatt = "([\\p{Punct}&&[^_]])";
 		// Create a Pattern object
-		Pattern pattern = Pattern.compile(punct_pattern);
+		Pattern pattern = Pattern.compile(punctPatt);
 
 		Matcher matcher = pattern.matcher(str);
 
 		StringBuffer sb = new StringBuffer();
-		
+
 		while (true == matcher.find()){
-			String escape_punct = "\\\\" + matcher.group();
+			String escapePunct = "\\\\" + matcher.group();
 			if (matcher.group().equals(";") || matcher.group().equals("{") || matcher.group().equals("}")) {
 				// append anonymous symbols
-				escape_punct = new String(escape_punct+"(?:.*?)?");
+				escapePunct = new String(escapePunct+"(?:.*?)?");
 			}
-			matcher.appendReplacement(sb, escape_punct);
+			matcher.appendReplacement(sb, escapePunct);
 		}
 		matcher.appendTail(sb);
 		return sb.toString();
 	}
-	
+
 	/**
 	 * extract var and build var-based Regexp
-	 *  1. build var-based regular expression.  
+	 *  1. build var-based regular expression.
 	 *  2. extract the var and store in the Vector<String>
 	 * @param str
 	 *
@@ -216,7 +216,7 @@ public class Utility {
 
 		// Create a Pattern object
 		Pattern varPattern = Pattern.compile(varPatternStr);
-		
+
 		Matcher varMatcher = varPattern.matcher(str);
 
 		StringBuffer varSb = new StringBuffer();
@@ -267,7 +267,7 @@ public class Utility {
 
 		// build var based regular expression
 		String varPatternStr = buildvarBasedRegexp(str, var);
-		
+
 		// Create a Pattern object
 		Pattern varPattern = Pattern.compile(varPatternStr);
 		Matcher varMatcher = varPattern.matcher(tar);
@@ -277,7 +277,7 @@ public class Utility {
 			// debug i from 0 to 1
 			for (int i = 0; i != numMatches; ++i) {
 				String toBeReplaced = "\\b" + varMatcher.group(i+1) + "\\b";
-				String middlewareReplacement = "0R" + var.get(i);				
+				String middlewareReplacement = "0R" + var.get(i);
 				tar = tar.replaceAll(toBeReplaced, middlewareReplacement);
 			}
 			tar = tar.replaceAll("\\b0R", "");
@@ -288,7 +288,7 @@ public class Utility {
 
 	/**
 	 * Split function.
-	 * 
+	 *
 	 * @param program
 	 *            the program
 	 * @return the array list

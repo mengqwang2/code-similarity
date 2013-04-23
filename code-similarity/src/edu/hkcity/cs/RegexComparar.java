@@ -17,7 +17,7 @@ public class RegexComparar extends Comparar {
 
 	/**
 	 * Instantiates a new regex comparar.
-	 * 
+	 *
 	 * @param tar
 	 *            the tar
 	 * @param ori
@@ -34,9 +34,9 @@ public class RegexComparar extends Comparar {
 	public String compare(Formatter fmt, Output output) {
 		String target = fmt.format(getTar());
 		String original = fmt.format(getOri());
-		
+
 		Double result = calRegedSim(target, original);
-		
+
 		output.print(info, result);
 
 		return Double.toString(result);
@@ -45,7 +45,7 @@ public class RegexComparar extends Comparar {
 	//
 	/**
 	 * Cal reged sim.
-	 * 
+	 *
 	 * @param tar
 	 *            the tar
 	 * @param ori
@@ -60,20 +60,20 @@ public class RegexComparar extends Comparar {
 		Arrays.sort(tarVars);
 		Arrays.sort(oriVars);
 
-		int tar_length = tarVars.length;
-		int ori_length = oriVars.length;
+		int tarLen = tarVars.length;
+		int oriLen = oriVars.length;
 
-		String[] sortedTar = new String[tar_length];
-		String[] sortedOri = new String[ori_length];
+		String[] sortedTar = new String[tarLen];
+		String[] sortedOri = new String[oriLen];
 
-		for (int i = 0; i < tar_length; ++i)
-			sortedTar[i] = tarVars[tar_length - 1 - i];	
-		for (int i = 0; i < ori_length; ++i)
-			sortedOri[i] = oriVars[ori_length - 1 - i];
-		
+		for (int i = 0; i < tarLen; ++i)
+			sortedTar[i] = tarVars[tarLen - 1 - i];
+		for (int i = 0; i < oriLen; ++i)
+			sortedOri[i] = oriVars[oriLen - 1 - i];
+
 		String[] regedTar = tar.replaceAll("\\s|;|" + Utility.join(sortedTar, "|"), "").split("");
 		String[] regedOri = ori.replaceAll("\\s|;|" + Utility.join(sortedOri, "|"), "").split("");
-		
+
 		return (Utility.lcs(regedTar, regedOri)+Utility.lcs(regedOri, regedTar))/2;
 	}
 }

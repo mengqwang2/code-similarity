@@ -9,7 +9,7 @@ public class FuncByFuncComparar extends Comparar {
 	// Constructor
 	/**
 	 * Instantiates a new func by func comparar.
-	 * 
+	 *
 	 * @param tar
 	 *            the tar
 	 * @param ori
@@ -23,7 +23,7 @@ public class FuncByFuncComparar extends Comparar {
 	// Overload compare()
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see edu.hkcity.cs.Comparar#compare(edu.hkcity.cs.Formatter,
 	 * edu.hkcity.cs.Output)
 	 */
@@ -37,11 +37,11 @@ public class FuncByFuncComparar extends Comparar {
 		double sims[] = new double[Math.max(targetFuncList.size(),
 				originalFuncList.size())];
 		int lnt[] = new int[sims.length];
-		int sims_i = 0, count_j = 0;
+		int iSims = 0, jCount = 0;
 
 		for (int i = 0; i < targetFuncList.size(); i++) {
-			double max_sim = -1;
-			int max_j = -1;
+			double maxSim = -1;
+			int jMax = -1;
 			for (int j = 0; j < originalFuncList.size(); j++) {
 				if (oriFuncPaired[j])
 					continue;
@@ -59,28 +59,28 @@ public class FuncByFuncComparar extends Comparar {
 
 				double sim = Utility.lcs(tarFunToken, oriFunToken);
 
-				if (sim > max_sim) {
-					max_j = j;
-					max_sim = sim;
+				if (sim > maxSim) {
+					jMax = j;
+					maxSim = sim;
 				}
 			}
-			if (max_j != -1) {
-				count_j++;
-				oriFuncPaired[max_j] = true;
-				lnt[sims_i] = Math.max(targetFuncList.get(i).length(),
-						originalFuncList.get(max_j).length());
+			if (jMax != -1) {
+				jCount++;
+				oriFuncPaired[jMax] = true;
+				lnt[iSims] = Math.max(targetFuncList.get(i).length(),
+						originalFuncList.get(jMax).length());
 			} else {
-				lnt[sims_i] = targetFuncList.get(i).length();
+				lnt[iSims] = targetFuncList.get(i).length();
 			}
-			sims[sims_i++] = max_sim;
+			sims[iSims++] = maxSim;
 		}
 
-		if (count_j != originalFuncList.size()) {
+		if (jCount != originalFuncList.size()) {
 			for (int j = 0; j < originalFuncList.size(); j++) {
 				if (oriFuncPaired[j])
 					continue;
-				sims[sims_i] = 0;
-				lnt[sims_i++] = originalFuncList.get(j).length();
+				sims[iSims] = 0;
+				lnt[iSims++] = originalFuncList.get(j).length();
 				oriFuncPaired[j] = true;
 			}
 		}
@@ -94,7 +94,7 @@ public class FuncByFuncComparar extends Comparar {
 
 	/**
 	 * Cal similarity.
-	 * 
+	 *
 	 * @param sims
 	 *            the sims
 	 * @param lnt

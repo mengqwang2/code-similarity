@@ -125,7 +125,7 @@ public class UtilityTest {
 		assertEquals(result,
 				"foo(bar){for(i=0;i!=10;++i){i+=10;b=i+3;c+=i;i=2;i=3;i=4;}}");
 	}
-	
+
 	@Test
 	public void testReplace3() {
 		String org = "bar(foo){for(a=0;a!=10;++a){a+=10;b=a+3;c+=a;a=2;a=3;a=4;}}";
@@ -134,7 +134,7 @@ public class UtilityTest {
 		assertEquals(result,
 				"bar(foo){for(a=0;a!=10;++a){a+=10;b=a+3;c+=a;a=2;a=3;a=4;}}");
 	}
-	
+
 	@Test
 	public void testReplace4() {
 		String org = "int foo(int i=0, int j=1) {printf(\"Hello World\n\");return i+j;}";

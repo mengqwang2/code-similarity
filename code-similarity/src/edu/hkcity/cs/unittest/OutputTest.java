@@ -28,19 +28,19 @@ public class OutputTest {
 	}
 
 	@Test
-	public void testPrint_1() {
+	public void testPrint1() {
 		po.print("name", 0.333333333);
 		assertEquals("name : 33.33%\n", output.toString());
 	}
-	
+
 	@Test
-	public void testPrint_2() {
+	public void testPrint2() {
 		po.print("ss", 1);
 		assertEquals("ss : 100.00%\n", output.toString());
 	}
-	
+
 	@Test
-	public void testPrint_3() {
+	public void testPrint3() {
 		po.print("formatter", 0.99);
 		assertEquals("formatter : 99.00%\n", output.toString());
 	}
