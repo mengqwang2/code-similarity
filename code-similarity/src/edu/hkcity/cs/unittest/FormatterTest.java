@@ -135,8 +135,8 @@ public class FormatterTest {
 
     @Test
     public void testVariableDeclaration3() {
-        String str = "int main(){\nint __a,a=1,b,c=3,d=2/2,e=time(NULL);\n}";
-        assertEquals("int main(){\na=1,c=3,d=2/2,e=time(NULL);\n}",
+        String str = "int main(){\nint __a,a=1,b,c = 3,d=2/2,e=time(NULL);\n}";
+        assertEquals("int main(){\na=1,c = 3,d=2/2,e=time(NULL);\n}",
                 fm.formatVariableDeclaration(str));
     }
 
