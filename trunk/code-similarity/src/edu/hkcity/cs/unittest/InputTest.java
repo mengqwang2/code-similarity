@@ -18,120 +18,125 @@ import edu.hkcity.cs.Input;
 import edu.hkcity.cs.Output;
 
 public class InputTest {
-    private File oriF;
-    private File tarF;
+	private File ori_f;
+	private File tar_f;
 
-    @Before
-    public void setUp() throws Exception {
-        oriF = new File("ori.txt");
-        tarF = new File("tar.txt");
-    }
+	@Before
+	public void setUp() throws Exception {
+		ori_f = new File("ori.txt");
+		tar_f = new File("tar.txt");
+	}
 
-    @After
-    public void tearDown() throws Exception {
-        oriF.delete();
-        oriF = null;
-        tarF.delete();
-        tarF = null;
-    }
+	@After
+	public void tearDown() throws Exception {
+		ori_f.delete();
+		ori_f = null;
+		tar_f.delete();
+		tar_f = null;
+	}
 
-    @Test
-    public void testInput1() throws IOException{
-        FileWriter oriFw = new FileWriter(oriF, false);
-        FileWriter tarFw = new FileWriter(tarF, false);
+	@Test
+	// Test input by predefined filename (Same files, non c code)
+	public void testInput_1() throws IOException{
+		FileWriter ori_fw = new FileWriter(ori_f, false);
+		FileWriter tar_fw = new FileWriter(tar_f, false);
 
-        String inStr = "Hello world!";
-        oriFw.write(inStr);
-        oriFw.close();
-        tarFw.write(inStr);
-        tarFw.close();
+		String inStr = "Hello world!";
+		ori_fw.write(inStr);
+		ori_fw.close();
+		tar_fw.write(inStr);
+		tar_fw.close();
 
-        Input input = new Input("ori.txt", "tar.txt");
-        input.getInput();
-        assertEquals(inStr, input.getOriginalFile());
-        assertEquals(inStr, input.getTargetFile());
-    }
+		Input input = new Input("ori.txt", "tar.txt");
+		input.getInput();
+		assertEquals(inStr, input.getOriginalFile());
+		assertEquals(inStr, input.getTargetFile());
+	}
 
-    @Test
-    public void testInput2() throws IOException {
-        FileWriter oriFw = new FileWriter(oriF, false);
-        FileWriter tarFw = new FileWriter(tarF, false);
+	@Test
+	// Test input by predefined filename (Same files, c code)
+	public void testInput_2() throws IOException {
+		FileWriter ori_fw = new FileWriter(ori_f, false);
+		FileWriter tar_fw = new FileWriter(tar_f, false);
 
-        String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
-                + "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
-                + "}\n";
-        oriFw.write(inStr);
-        oriFw.close();
-        tarFw.write(inStr);
-        tarFw.close();
+		String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
+				+ "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
+				+ "}\n";
+		ori_fw.write(inStr);
+		ori_fw.close();
+		tar_fw.write(inStr);
+		tar_fw.close();
 
-        Input input = new Input("ori.txt", "tar.txt");
-        input.getInput();
-        assertEquals(inStr, input.getOriginalFile());
-        assertEquals(inStr, input.getTargetFile());
-    }
+		Input input = new Input("ori.txt", "tar.txt");
+		input.getInput();
+		assertEquals(inStr, input.getOriginalFile());
+		assertEquals(inStr, input.getTargetFile());
+	}
+	
+	@Test
+	// Test input by entering filename during execution (Same files, non c code)
+	public void testInputNA_1() throws IOException {
+		FileWriter ori_fw = new FileWriter(ori_f, false);
+		FileWriter tar_fw = new FileWriter(tar_f, false);
 
-    @Test
-    public void testInputNA1() throws IOException {
-        FileWriter oriFw = new FileWriter(oriF, false);
-        FileWriter tarFw = new FileWriter(tarF, false);
+		String inStr = "Hello world!";
+		ori_fw.write(inStr);
+		ori_fw.close();
+		tar_fw.write(inStr);
+		tar_fw.close();
 
-        String inStr = "Hello world!";
-        oriFw.write(inStr);
-        oriFw.close();
-        tarFw.write(inStr);
-        tarFw.close();
+		InputStream oriin = System.in;
+		System.setIn(new StringBufferInputStream("ori.txt\ntar.txt\n"));
+		Input input = new Input();
+		input.getInput();
+		assertEquals(inStr, input.getOriginalFile());
+		assertEquals(inStr, input.getTargetFile());
+		System.setIn(oriin);
+	}
 
-        InputStream oriin = System.in;
-        System.setIn(new StringBufferInputStream("ori.txt\ntar.txt\n"));
-        Input input = new Input();
-        input.getInput();
-        assertEquals(inStr, input.getOriginalFile());
-        assertEquals(inStr, input.getTargetFile());
-        System.setIn(oriin);
-    }
+	@Test
+	// Test input by entering filename during execution (Same files, c code)
+	public void testInputNA_2() throws IOException {
+		FileWriter ori_fw = new FileWriter(ori_f, false);
+		FileWriter tar_fw = new FileWriter(tar_f, false);
 
-    @Test
-    public void testInputNA2() throws IOException {
-        FileWriter oriFw = new FileWriter(oriF, false);
-        FileWriter tarFw = new FileWriter(tarF, false);
+		String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
+				+ "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
+				+ "}\n";
+		ori_fw.write(inStr);
+		ori_fw.close();
+		tar_fw.write(inStr);
+		tar_fw.close();
 
-        String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
-                + "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
-                + "}\n";
-        oriFw.write(inStr);
-        oriFw.close();
-        tarFw.write(inStr);
-        tarFw.close();
+		InputStream oriin = System.in;
+		System.setIn(new StringBufferInputStream("ori.txt\ntar.txt\n"));
+		Input input = new Input();
+		input.getInput();
+		assertEquals(inStr, input.getOriginalFile());
+		assertEquals(inStr, input.getTargetFile());
+		System.setIn(oriin);
+	}
+	
+	@Test
+	// Test input by entering filename during execution (1 not exists filename, 2 Same files, c code)
+	public void testInputWrongFileName() throws IOException {
+		FileWriter ori_fw = new FileWriter(ori_f, false);
+		FileWriter tar_fw = new FileWriter(tar_f, false);
 
-        InputStream oriin = System.in;
-        System.setIn(new StringBufferInputStream("ori.txt\ntar.txt\n"));
-        Input input = new Input();
-        input.getInput();
-        assertEquals(inStr, input.getOriginalFile());
-        assertEquals(inStr, input.getTargetFile());
-        System.setIn(oriin);
-    }
+		String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
+				+ "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
+				+ "}\n";
+		ori_fw.write(inStr);
+		ori_fw.close();
+		tar_fw.write(inStr);
+		tar_fw.close();
 
-    @Test
-    public void testInputWrongFileName() throws IOException {
-        FileWriter oriFw = new FileWriter(oriF, false);
-        FileWriter tarFw = new FileWriter(tarF, false);
-
-        String inStr = "#include <stdio.h>;" + "\n\n" + "int main(){\n"
-                + "    printf(\"hello world!\\n\");\n" + "    return 0;\n"
-                + "}\n";
-        oriFw.write(inStr);
-        oriFw.close();
-        tarFw.write(inStr);
-        tarFw.close();
-
-        InputStream oriin = System.in;
-        System.setIn(new StringBufferInputStream("noSuchFile.txt\nori.txt\ntar.txt\n"));
-        Input input = new Input();
-        input.getInput();
-        assertEquals(inStr, input.getOriginalFile());
-        assertEquals(inStr, input.getTargetFile());
-        System.setIn(oriin);
-    }
+		InputStream oriin = System.in;
+		System.setIn(new StringBufferInputStream("noSuchFile.txt\nori.txt\ntar.txt\n"));
+		Input input = new Input();
+		input.getInput();
+		assertEquals(inStr, input.getOriginalFile());
+		assertEquals(inStr, input.getTargetFile());
+		System.setIn(oriin);
+	}
 }
