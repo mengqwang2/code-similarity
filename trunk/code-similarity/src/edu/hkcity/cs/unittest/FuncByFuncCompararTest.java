@@ -16,6 +16,7 @@ public class FuncByFuncCompararTest {
 	}
 
 	@Test
+	// Test FuncByFuncComparar compare function (2 different function call statement)
 	public void testCompare_1() {
 		String ori = "int main () { x();}";
 		String tar = "int main () { y();}";
@@ -24,6 +25,7 @@ public class FuncByFuncCompararTest {
 	}
 
 	@Test
+	// Test FuncByFuncComparar compare function (3 function call statement, different order)
 	public void testCompare_2() {
 		String ori = "int main () { x();y();z();}";
 		String tar = "int main () { y();z();x();}";
@@ -32,6 +34,7 @@ public class FuncByFuncCompararTest {
 	}
 
 	@Test
+    // Test FuncByFuncComparar compare function (different function name and statements)
 	public void testCompare_3() {
 		String ori = "int ha () { }";
 		String tar = "int main () { y();z();}";
@@ -40,6 +43,7 @@ public class FuncByFuncCompararTest {
 	}
 
 	@Test
+    // Test FuncByFuncComparar compare function (different function name and statements, parameter reversed )
 	public void testCompare_4() {
 		String ori = "int main () { y();z();}";
 		String tar = "int ha () { }";
@@ -48,6 +52,7 @@ public class FuncByFuncCompararTest {
 	}
 
 	@Test
+    // Test FuncByFuncComparar compare function (same function name ,different statements, parameter reversed )
 	public void testCompare_5() {
 		String ori = "int main () { y();z(); }";
 		String tar = "int main () { }";
@@ -56,6 +61,7 @@ public class FuncByFuncCompararTest {
 	}
 	
 	@Test
+	// Test FuncByFuncComparar compare function (multi functions, partial identical)
 	public void testCompare_6() {
 		String ori = "int a(){a1();}\nint b(){b1();}\nint c(){c1();}\nint d(){d1();}";
 		String tar = "int a(){a1();}\nint b(){b1();}";
@@ -64,6 +70,7 @@ public class FuncByFuncCompararTest {
 	}
 	
 	@Test
+	// Test FuncByFuncComparar compare function (multi functions, partial identical, parameter reversed )
 	public void testCompare_7() {
 		String ori = "int a(){a1();}\nint b(){b1();}";
 		String tar = "int a(){a1();}\nint b(){b1();}\nint c(){c1();}\nint d(){d1();}";
