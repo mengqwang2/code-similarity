@@ -24,7 +24,7 @@ public class UtilityTest {
     }
 
     @Test
- // Test string join function (6 strings, ','connecter)
+    // Test string join function (6 strings, ','connecter)
     public void testJoin2() {
         String[] testArr = { "there are one", "two", "three", "four", "five",
                 "six people" };

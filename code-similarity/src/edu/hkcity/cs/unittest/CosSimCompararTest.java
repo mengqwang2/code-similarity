@@ -72,7 +72,7 @@ public class CosSimCompararTest {
     }
 
     @Test
- // Test PubCosSimliar function (identical string)
+    // Test PubCosSimliar function (identical string)
     public void testPubCosSimliar1() {
         String str1 = new String(
                 "int main() { int a=1,b=2; int c; c=a+b; if(c>2*b) cout<<c; else cout<<0; } ");
