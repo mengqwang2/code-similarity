@@ -15,6 +15,7 @@ public class RegexCompararTest {
     }
 
     @Test
+    // Test CalRegedSim function (Non code, words)
     public void testCalRegedSim1() {
         class RegexStub extends RegexComparar {
             public double testCalRS(String tar, String ori) {
@@ -25,10 +26,11 @@ public class RegexCompararTest {
         String code2 = "You can see actually these two are not code so they have quite high similarity.";
         RegexStub comp = new RegexStub();
         String result = Double.toString(comp.testCalRS(code1, code2));
-        assertEquals(result, "1.0");
+        assertEquals("1.0", result);
     }
 
     @Test
+    // Test CalRegedSim function (Non code, equation)
     public void testCalRegedSim2() {
         class RegexStub extends RegexComparar {
             public double testCalRS(String tar, String ori) {
@@ -39,10 +41,11 @@ public class RegexCompararTest {
         String code2 = "P=PI*(r^2)";
         RegexStub comp = new RegexStub();
         String result = Double.toString(comp.testCalRS(code1, code2));
-        assertEquals(result, "1.0");
+        assertEquals("1.0", result);
     }
 
     @Test
+    // Test CalRegedSim function (Non code, equation + words)
     public void testCalRegedSim3() {
         class RegexStub extends RegexComparar {
             public double testCalRS(String tar, String ori) {
@@ -53,33 +56,36 @@ public class RegexCompararTest {
         String code2 = "Omg=omg*(omg^2) are you kidding me that they are the same?";
         RegexStub comp = new RegexStub();
         String result = Double.toString(comp.testCalRS(code1, code2));
-        assertEquals(result, "1.0");
+        assertEquals("1.0", result);
     }
 
     @Test
+    // Test RegexComparar compare function (Non code, words)
     public void testCompare1() {
         String code1 = "The      quick brown fox jumps over the lazy dog.";
         String code2 = "You can see actually these two      are not code so they are treated the same.";
         RegexComparar comp = new RegexComparar(code1, code2);
         String result = comp.compare(new Formatter(), new Output());
-        assertEquals(result, "1.0");
+        assertEquals("1.0", result);
     }
 
     @Test
+    // Test RegexComparar compare function (expressions)
     public void testCompare2() {
         String code1 = "E\n!=\tm*(c^2)\t\t\t";
         String code2 = "P~=PI*(r^2)\n\n\n";
         RegexComparar comp = new RegexComparar(code1, code2);
         String result = comp.compare(new Formatter(), new Output());
-        assertEquals(result, "0.875");
+        assertEquals("0.875", result);
     }
 
     @Test
+    // Test RegexComparar compare function (Non code, equation + words)
     public void testCompare3() {
         String code1 = "E=m*(c^2)\n is the most famous formula and frankly I am kidding you";
         String code2 = "Omg=omg*(omg^2)            are you kidding me that they are the same yes sir";
         RegexComparar comp = new RegexComparar(code1, code2);
         String result = comp.compare(new Formatter(), new Output());
-        assertEquals(result, "1.0");
+        assertEquals("1.0", result);
     }
 }
