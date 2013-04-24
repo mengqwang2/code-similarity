@@ -23,48 +23,48 @@ public class FormatterTest {
 
     @Test
     //formatter test (Ref text, no formatting can be applied)
-    public void reference_test() {
+    public void testReference() {
         String str = "Normal Text";
         assertEquals("Normal Text", fm.format(str));
     }
 
     @Test
-  //formatter Delete Indent test (space)
+    //formatter Delete Indent test (with space)
     public void testDeleteIndent1() {
         String str = " Hello world!";
         assertEquals("Hello world!", fm.format(str));
     }
 
     @Test
-    //formatter Delete Indent test (tab)
+    //formatter Delete Indent test (with tab)
     public void testDeleteIndent2() {
         String str = "\tHello world!";
         assertEquals("Hello world!", fm.format(str));
     }
 
     @Test
-  //formatter Delete Indent test (multi space )
+    //formatter Delete Indent test (with multi space)
     public void testDeleteIndent3() {
         String str = "         Hello world!";
         assertEquals("Hello world!", fm.format(str));
     }
 
     @Test
-    //formatter Delete Indent test (multi tab)
+    //formatter Delete Indent test (with multi tab)
     public void testDeleteIndent4() {
         String str = "\t\t\t\t\t\tHello world!";
         assertEquals("Hello world!", fm.format(str));
     }
 
     @Test
-    //formatter Delete Indent test (multi tab and space mixed)
+    //formatter Delete Indent test (with multi tab and space mixed)
     public void testDeleteIndent5() {
         String str = "\t   \t \t\t    Hello world!";
         assertEquals("Hello world!", fm.format(str));
     }
 
     @Test
-  //formatter Simply Multispace test (multispace)
+    //formatter Simply Multispace test (multispace)
     public void testSimplyMultispace1() {
         String str = "Hello        world!            ";
         assertEquals("Hello world! ", fm.format(str));
@@ -72,7 +72,7 @@ public class FormatterTest {
 
     @Test
     
-  //formatter Simply Multispace test (multispace + tab mixed)
+    //formatter Simply Multispace test (multispace + tab mixed)
     public void testSimplyMultispace2() {
         String str = "Hello\t     \t world! \t";
         assertEquals("Hello world! ", fm.format(str));
@@ -86,7 +86,7 @@ public class FormatterTest {
     }
 
     @Test
-  //formatter Delete Comment test (singleline + multiline comment)
+    //formatter Delete Comment test (singleline + multiline comment)
     public void testDeleteComment1() {
         String str = "System.out.println(\"Hi!\\n\")// Say Hi!\nreturn 0;/*\n*Bye!\n*/";
         assertEquals("System.out.println(\"Hi!\\n\")\nreturn 0;",
@@ -94,7 +94,7 @@ public class FormatterTest {
     }
 
     @Test
-  //formatter Delete Comment test (multi multiline comment)
+    //formatter Delete Comment test (multi multiline comment)
     public void testDeleteComment2() {
         String str = "System.out.println(\"Hi!\\n\")/*\n*Say Hi!\n*/\nreturn 0;/*\n*Bye!\n*/";
         assertEquals("System.out.println(\"Hi!\\n\")\nreturn 0;",
@@ -161,7 +161,7 @@ public class FormatterTest {
     }
 
     @Test
-  //formatter simply Variable Declaration test (declaration with partially init 2)
+    //formatter simply Variable Declaration test (declaration with partially init 2)
     public void testVariableDeclaration4() {
         String str = "int main(){\nint a=test(1,2.3,\"test\"),c;\n}";
         assertEquals("int main(){\na=test(1,2.3,\"test\");\n}",
@@ -169,7 +169,7 @@ public class FormatterTest {
     }
 
     @Test
-  //formatter simply Variable Declaration test (pointer and array declaration with partially init)
+    //formatter simply Variable Declaration test (pointer and array declaration with partially init)
     public void testVariableDeclaration5() {
         String str = "int main(){\nint** a=new int[5][5];\nint **a=new int[5][5];\nint a[5][5]={};\n}";
         assertEquals(
