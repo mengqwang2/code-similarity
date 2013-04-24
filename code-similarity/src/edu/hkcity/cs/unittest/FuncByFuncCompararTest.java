@@ -21,7 +21,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { x();}";
 		String tar = "int main () { y();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.6666");
+		assertEquals("0.6666", c.compare(new Formatter(), new Output()));
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { x();y();z();}";
 		String tar = "int main () { y();z();x();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.8");
+		assertEquals("0.8" ,c.compare( new Formatter(), new Output()));
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int ha () { }";
 		String tar = "int main () { y();z();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.5");
+		assertEquals( "0.5",c.compare( new Formatter(), new Output()));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { y();z();}";
 		String tar = "int ha () { }";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.25");
+		assertEquals("0.25",c.compare( new Formatter(), new Output()) );
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int main () { y();z(); }";
 		String tar = "int main () { }";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.5");
+		assertEquals("0.5", c.compare(new Formatter(), new Output()));
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class FuncByFuncCompararTest {
 		String ori = "int a(){a1();}\nint b(){b1();}\nint c(){c1();}\nint d(){d1();}";
 		String tar = "int a(){a1();}\nint b(){b1();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.5");
+		assertEquals("0.5",c.compare( new Formatter(), new Output()));
 	}
 	
 	@Test
@@ -75,6 +75,6 @@ public class FuncByFuncCompararTest {
 		String ori = "int a(){a1();}\nint b(){b1();}";
 		String tar = "int a(){a1();}\nint b(){b1();}\nint c(){c1();}\nint d(){d1();}";
 		Comparar c = new FuncByFuncComparar(tar, ori);
-		assertEquals(c.compare(new Formatter(), new Output()), "0.5");
+		assertEquals("0.5", c.compare(new Formatter(), new Output()));
 	}
 }
