@@ -48,8 +48,8 @@ public class CosSimCompararTest {
     }
 
     @Test
+    // Test CosSimComparar compare function (different function name and statements, parameter reversed )
     public void testCompare4() {
-        // Test CosSimComparar compare function (different function name and statements, parameter reversed )
         String ori = "int main () { y();z();}";
         String tar = "int ha () { }";
         Comparar c = new CosSimComparar(tar, ori);
@@ -58,7 +58,7 @@ public class CosSimCompararTest {
     }
 
     @Test
-    // Test CosSimComparar compare function (different function name and statements, parameter reversed )
+    // Test CosSimComparar compare function (same function name ,different statements, parameter reversed )
     public void testCompare5() {
         String ori = "int main () { y();z(); }";
         String tar = "int main () { }";
