@@ -77,4 +77,13 @@ public class FuncByFuncCompararTest {
 		Comparar c = new FuncByFuncComparar(tar, ori);
 		assertEquals("0.5", c.compare(new Formatter(), new Output()));
 	}
+	
+	@Test
+	// Test FuncByFuncComparar compare function (multi functions, partial identical 2)
+	public void testCompare_8() {
+		String ori = "int a(){a1();}\n";
+		String tar = "int a(){a1();}\nint b(){b1();}\nint c(){c1();}\nint d(){d1();}";
+		Comparar c = new FuncByFuncComparar(tar, ori);
+		assertEquals("0.25", c.compare(new Formatter(), new Output()));
+	}
 }
