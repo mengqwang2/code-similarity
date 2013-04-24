@@ -23,7 +23,7 @@ public class LineByLineComparerTest {
 		String ori = "#include <iostream>\nusingnamespace standard;\nint main() {\n    cout << \"hello world!\";\n}";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "0.6");
+		assertEquals("0.6", result);
 	}
 
 	@Test
@@ -33,7 +33,7 @@ public class LineByLineComparerTest {
 		String ori = "#include <iostream>\nusingnamespace std;\n\nvoid main() {    int sum=0;\n    for(int i=1;i<=100;++i)\n        sum += i;\n    cout << \"The sum from 1 to 100 is: \" << sum << endl;\n}";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "1.0");
+		assertEquals("1.0", result );
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class LineByLineComparerTest {
 		String ori = "#include<iosteam>\n\nvoid main(){\nint a,b;\nstd::cin>>a>>b;\nstd::cout<<a+b<<endl;\n}\n";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "0.125");
+		assertEquals("0.125", result);
 	}
 
 	@Test
@@ -53,6 +53,6 @@ public class LineByLineComparerTest {
 		String ori = "#include<iostream>\nusing namespace std;\nint main(){\nint x,y;\nwhile(cin>>x)\n{    cin>>y;\n    cout<<x+y<<endl;\n}\n}\n";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "0.375");
+		assertEquals("0.375", result);
 	}
 }
