@@ -18,6 +18,7 @@ public class CosSimCompararTest {
     }
 
     @Test
+    // Test CosSimComparar compare function (2 different function call statement)
     public void testCompare1() {
         String ori = "int main () { x();}";
         String tar = "int main () { y();}";
@@ -27,6 +28,7 @@ public class CosSimCompararTest {
     }
 
     @Test
+    // Test CosSimComparar compare function (3 function call statement, different order)
     public void testCompare2() {
         String ori = "int main () { x();y();z();}";
         String tar = "int main () { y();z();x();}";
@@ -36,6 +38,7 @@ public class CosSimCompararTest {
     }
 
     @Test
+    // Test CosSimComparar compare function (different function name and statements)
     public void testCompare3() {
         String ori = "int ha () { }";
         String tar = "int main () { y();z();}";
@@ -46,7 +49,7 @@ public class CosSimCompararTest {
 
     @Test
     public void testCompare4() {
-
+        // Test CosSimComparar compare function (different function name and statements, parameter reversed )
         String ori = "int main () { y();z();}";
         String tar = "int ha () { }";
         Comparar c = new CosSimComparar(tar, ori);
@@ -55,6 +58,7 @@ public class CosSimCompararTest {
     }
 
     @Test
+    // Test CosSimComparar compare function (different function name and statements, parameter reversed )
     public void testCompare5() {
         String ori = "int main () { y();z(); }";
         String tar = "int main () { }";
@@ -64,6 +68,7 @@ public class CosSimCompararTest {
     }
 
     @Test
+    // Test CosSimComparar compare function (same function name, different statements)
     public void testCompare6() {
         String ori = "int main () { y();z(); }";
         String tar = "int main () { a();b();c();}";
@@ -73,6 +78,7 @@ public class CosSimCompararTest {
     }
 
     @Test
+ // Test PubCosSimliar function (identical string)
     public void testPubCosSimliar1() {
         String str1 = new String(
                 "int main() { int a=1,b=2; int c; c=a+b; if(c>2*b) cout<<c; else cout<<0; } ");
@@ -85,7 +91,7 @@ public class CosSimCompararTest {
     }
 
     @Test
-    // shift code
+    // Test PubCosSimliar function (code shifted )
     public void testPubCosSimliar2() {
         String str1 = new String(
                 "int main() { int c; int a=1,b=2; c=a+b; if(c>2*b) cout<<c; else cout<<0; } ");
@@ -98,7 +104,7 @@ public class CosSimCompararTest {
     }
 
     @Test
-    // first part remove
+    // Test PubCosSimliar function (first part removed)
     public void testPubCosSimliar3() {
         String str1 = new String("c=a+b; if(c>2*b) cout<<c; else cout<<0; } ");
         String str2 = new String(
@@ -110,7 +116,7 @@ public class CosSimCompararTest {
     }
 
     @Test
-    // last part remove
+    // Test PubCosSimliar function (last part removed)
     public void testPubCosSimliar4() {
         String str1 = new String("int main() { int c; int a=1,b=2; ");
         String str2 = new String(
