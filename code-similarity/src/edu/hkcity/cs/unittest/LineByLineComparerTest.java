@@ -23,7 +23,7 @@ public class LineByLineComparerTest {
 		String ori = "abc";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "1.0");
+		assertEquals("1.0", result);
 	}
 	
 	@Test
@@ -33,7 +33,7 @@ public class LineByLineComparerTest {
 		String ori = "abcd";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "0.0");
+		assertEquals("0.0", result);
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class LineByLineComparerTest {
 		String ori = "a\nc";
 		comp = new LineByLineComparar(tar, ori);
 		String result = comp.compare(new Formatter(), new Output());
-		assertEquals(result, "0.5");
+		assertEquals("0.5", result);
 	}
 	
 	@Test
