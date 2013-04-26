@@ -296,13 +296,15 @@ public class Utility {
 		Matcher matcher = pattern.matcher(program);
 		int start = 0;
 		int nextStart = 0;
+		boolean isFirst = true;
 		while (matcher.find()) {
 			start = nextStart;
 			nextStart = matcher.start();
-			if (nextStart != 0) {
+			if (!isFirst) {
 				funcList.add(program.substring(start, nextStart).replaceAll(
 						"[\\r\\n\\s]+$", ""));
 			}
+			isFirst = false;
 		}
 		funcList.add(program.substring(nextStart, program.length()).replaceAll(
 				"[\\r\\n\\s]+$", ""));
