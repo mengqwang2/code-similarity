@@ -36,9 +36,11 @@ public class Utility {
      */
     public static String join(String[] arr, String delimiter) {
         String result = "";
-        for (int i = 0; i < arr.length - 1; ++i)
-            result += arr[i] + delimiter;
-        result += arr[arr.length - 1];
+        if(arr.length>0) {
+        	for (int i = 0; i < arr.length-1; ++i)
+        		result += arr[i] + delimiter;
+        	result += arr[arr.length - 1];
+        } 
         return result;
     }
 
