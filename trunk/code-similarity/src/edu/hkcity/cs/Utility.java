@@ -292,7 +292,7 @@ public class Utility {
 	public static ArrayList<String> splitFunction(String program) {
 		ArrayList<String> funcList = new ArrayList<String>();
 		Pattern pattern = Pattern.compile(
-				"[\\w\\*]* [\\w\\s]*\\((.?)\\)[ \\r\\n]*\\{", Pattern.MULTILINE);
+				"[\\w\\*<>,]+ [\\w\\s]+\\((.*?)\\)[ \\r\\n]*\\{", Pattern.MULTILINE);
 		Matcher matcher = pattern.matcher(program);
 		int start = 0;
 		int nextStart = 0;
