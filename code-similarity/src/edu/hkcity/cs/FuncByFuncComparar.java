@@ -40,7 +40,7 @@ public class FuncByFuncComparar extends Comparar {
         int iSims = 0, jCount = 0;
 
 		for (int i = 0; i < targetFuncList.size(); i++) {
-			double maxSim = 0;
+			double maxSim = -1;
 			int jMax = -1;
 			for (int j = 0; j < originalFuncList.size(); j++) {
 				if (oriFuncPaired[j])
@@ -69,10 +69,11 @@ public class FuncByFuncComparar extends Comparar {
                 oriFuncPaired[jMax] = true;
                 lnt[iSims] = Math.max(targetFuncList.get(i).length(),
                         originalFuncList.get(jMax).length());
+                sims[iSims++] = maxSim;
             } else {
                 lnt[iSims] = targetFuncList.get(i).length();
+                sims[iSims++] = 0;
             }
-            sims[iSims++] = maxSim;
         }
 
         if (jCount != originalFuncList.size()) {
